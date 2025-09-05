@@ -1,0 +1,51 @@
+PRNU FINGERPRINT EXTRACTION REPORT
+============================================================
+
+Total scanners processed: 11
+Total fingerprints created: 22
+Failed images: 0
+
+Canon120-1:
+  150 DPI - Shape: (256, 256), Mean: -0.000000, Std: 1.000000
+  300 DPI - Shape: (256, 256), Mean: 0.000000, Std: 1.000000
+
+Canon120-2:
+  150 DPI - Shape: (256, 256), Mean: -0.000000, Std: 1.000000
+  300 DPI - Shape: (256, 256), Mean: 0.000000, Std: 1.000000
+
+Canon220:
+  150 DPI - Shape: (256, 256), Mean: 0.000000, Std: 1.000000
+  300 DPI - Shape: (256, 256), Mean: 0.000000, Std: 1.000000
+
+Canon9000-1:
+  150 DPI - Shape: (256, 256), Mean: 0.000000, Std: 1.000000
+  300 DPI - Shape: (256, 256), Mean: -0.000000, Std: 1.000000
+
+Canon9000-2:
+  150 DPI - Shape: (256, 256), Mean: 0.000000, Std: 1.000000
+  300 DPI - Shape: (256, 256), Mean: 0.000000, Std: 1.000000
+
+EpsonV39-1:
+  150 DPI - Shape: (256, 256), Mean: 0.000000, Std: 1.000000
+  300 DPI - Shape: (256, 256), Mean: 0.000000, Std: 1.000000
+
+EpsonV39-2:
+  150 DPI - Shape: (256, 256), Mean: -0.000000, Std: 1.000000
+  300 DPI - Shape: (256, 256), Mean: 0.000000, Std: 1.000000
+
+EpsonV370-1:
+  150 DPI - Shape: (256, 256), Mean: -0.000000, Std: 1.000000
+  300 DPI - Shape: (256, 256), Mean: -0.000000, Std: 1.000000
+
+EpsonV370-2:
+  150 DPI - Shape: (256, 256), Mean: -0.000000, Std: 1.000000
+  300 DPI - Shape: (256, 256), Mean: -0.000000, Std: 1.000000
+
+EpsonV550:
+  150 DPI - Shape: (256, 256), Mean: 0.000000, Std: 1.000000
+  300 DPI - Shape: (256, 256), Mean: -0.000000, Std: 1.000000
+
+HP:
+  150 DPI - Shape: (256, 256), Mean: 0.000000, Std: 1.000000
+  300 DPI - Shape: (256, 256), Mean: -0.000000, Std: 1.000000
+

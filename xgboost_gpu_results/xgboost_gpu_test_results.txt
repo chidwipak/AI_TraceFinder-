@@ -1,0 +1,10 @@
+XGBOOST GPU TEST RESULTS
+==================================================
+
+GPU Configurations Tested: 0
+Models Evaluated: 3
+Total Time: 2:55:38.312209
+
+XGBoost_CPU_Ultra: 0.9151 (91.51%)
+XGBoost_CPU_Fast: 0.9103 (91.03%)
+XGBoost_95Plus_Target: 0.9103 (91.03%)

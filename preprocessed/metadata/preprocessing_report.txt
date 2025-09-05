@@ -1,0 +1,10 @@
+PREPROCESSING REPORT - OBJECTIVE 1: SCANNER IDENTIFICATION
+============================================================
+
+Total images: 4568
+Successfully processed: 4568
+Failed images: 0
+Success rate: 100.00%
+
+Training images: 4111
+Testing images: 457

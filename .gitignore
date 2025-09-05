@@ -71,20 +71,25 @@ cpu_optimized_cnn_mlp_97_plus.py
 
 # Results directories (exclude large result files but keep essential ones)
 achieve_95_results/
-advanced_models/
-baseline_models/
-deep_learning_models/
 final_95_results/
 final_95_results_monitored/
 final_push_95_results/
 gpu_optimized_cnn_mlp_97_results/
 gpu_optimized_results/
 high_accuracy_models/
-purdue_results/
 ultimate_hybrid_results/
-ultimate_results/
 ultra_models/
-xgboost_gpu_results/
+
+# Keep essential directories and their metadata
+!features/
+!preprocessed/
+!prnu_fingerprints/
+!purdue_results/
+!ultimate_results/
+!xgboost_gpu_results/
+!advanced_models/
+!baseline_models/
+!deep_learning_models/
 
 # Keep essential ensemble result files and metadata
 !ensemble_95_results_advanced/advanced_ensemble_results.txt

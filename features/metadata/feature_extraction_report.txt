@@ -1,0 +1,29 @@
+FEATURE EXTRACTION REPORT
+============================================================
+
+Total images processed: 4160
+Training images: 4111
+Test images: 49
+Failed images: 0
+Total features extracted: 153
+
+Feature Categories:
+  Correlation features (NCC): 22
+  Texture features (LBP): 26
+  Texture features (GLCM): 72
+  Frequency features (FFT): 8
+  Frequency features (DCT): 4
+  Statistical features: 21
+
+Per-Scanner Distribution:
+  Canon9000-1: 383
+  HP: 382
+  Canon120-2: 381
+  Canon220: 381
+  EpsonV39-1: 380
+  EpsonV370-2: 377
+  EpsonV370-1: 377
+  Canon120-1: 376
+  EpsonV39-2: 376
+  EpsonV550: 376
+  Canon9000-2: 371

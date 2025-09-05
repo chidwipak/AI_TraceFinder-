@@ -1,0 +1,70 @@
+ResNet50V2 - EVALUATION REPORT
+============================================================
+
+Accuracy: 0.0612
+Precision: 0.0398
+Recall: 0.0612
+F1-Score: 0.0440
+
+Classification Report:
+----------------------------------------
+Canon120-2:
+  Precision: 0.0000
+  Recall: 0.0000
+  F1-Score: 0.0000
+  Support: 7.0
+
+Canon220:
+  Precision: 0.0000
+  Recall: 0.0000
+  F1-Score: 0.0000
+  Support: 7.0
+
+Canon9000-1:
+  Precision: 0.2000
+  Recall: 0.2222
+  F1-Score: 0.2105
+  Support: 9.0
+
+Canon9000-2:
+  Precision: 0.0303
+  Recall: 0.2000
+  F1-Score: 0.0526
+  Support: 5.0
+
+EpsonV370-1:
+  Precision: 0.0000
+  Recall: 0.0000
+  F1-Score: 0.0000
+  Support: 3.0
+
+EpsonV370-2:
+  Precision: 0.0000
+  Recall: 0.0000
+  F1-Score: 0.0000
+  Support: 2.0
+
+EpsonV39-1:
+  Precision: 0.0000
+  Recall: 0.0000
+  F1-Score: 0.0000
+  Support: 6.0
+
+EpsonV39-2:
+  Precision: 0.0000
+  Recall: 0.0000
+  F1-Score: 0.0000
+  Support: 1.0
+
+EpsonV550:
+  Precision: 0.0000
+  Recall: 0.0000
+  F1-Score: 0.0000
+  Support: 1.0
+
+HP:
+  Precision: 0.0000
+  Recall: 0.0000
+  F1-Score: 0.0000
+  Support: 8.0
+
