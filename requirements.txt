@@ -1,0 +1,67 @@
+# AI_TraceFinder - Forensic Scanner Identification
+# Core dependencies for scanner identification and forensic analysis
+
+# Image Processing
+opencv-python==4.8.1.78
+Pillow==10.0.1
+scikit-image==0.21.0
+
+# Numerical Computing
+numpy==1.24.3
+scipy==1.11.1
+pandas==2.0.3
+
+# Machine Learning
+scikit-learn==1.3.0
+xgboost==1.7.6
+lightgbm==4.0.0
+
+# Deep Learning
+tensorflow==2.13.0
+torch==2.0.1
+torchvision==0.15.2
+
+# Signal Processing
+pywt==1.4.1
+librosa==0.10.1
+
+# Feature Extraction
+opencv-contrib-python==4.8.1.78
+mahotas==1.4.13
+
+# Visualization
+matplotlib==3.7.2
+seaborn==0.12.2
+plotly==5.15.0
+
+# Web Interface
+streamlit==1.25.0
+gradio==3.40.1
+
+# Model Explainability
+shap==0.42.1
+lime==0.2.0.1
+
+# Utilities
+tqdm==4.65.0
+joblib==1.3.2
+psutil==5.9.5
+
+# Development and Testing
+jupyter==1.0.0
+ipykernel==6.25.0
+pytest==7.4.0
+black==23.7.0
+flake8==6.0.0
+
+# Documentation
+sphinx==7.1.2
+sphinx-rtd-theme==1.3.0
+
+# Research Papers
+arxiv==2.2.0
+requests==2.31.0
+
+# Optional: GPU Support
+# tensorflow-gpu==2.13.0  # Uncomment if GPU available
+# torch==2.0.1+cu118  # Uncomment if GPU available

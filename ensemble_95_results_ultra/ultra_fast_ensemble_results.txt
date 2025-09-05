@@ -1,0 +1,16 @@
+ULTRA-FAST ENSEMBLE RESULTS (FIXED VERSION)
+==================================================
+
+Pipeline completed at: 2025-09-02 15:00:28
+Total ensembles: 7
+Successful: 7
+Failed: 0
+Success rate: 100.0%
+
+Stacking_Top5_Ridge: 0.9375 (93.75%)
+All_Models_Voting: 0.9343 (93.43%)
+Stacking_Top3_LR: 0.9295 (92.95%)
+Hybrid_Fast_Stacking: 0.9295 (92.95%)
+Voting_Top5_Soft: 0.9167 (91.67%)
+AdaBoost_DT: 0.8542 (85.42%)
+Bagging_RF: 0.7772 (77.72%)

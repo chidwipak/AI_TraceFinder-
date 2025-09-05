@@ -1,0 +1,118 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Logs
+*.log
+logs/
+
+# Model files (large files - keep only final production models)
+*.pkl
+*.h5
+*.hdf5
+*.joblib
+*.model
+
+# Dataset (exclude the SUPATLANTIQUE dataset)
+The SUPATLANTIQUE dataset/
+
+# Exclude training files (not ready yet)
+advanced_cnn_mlp_97_plus.py
+cpu_optimized_cnn_mlp_97_plus.py
+
+# Data files (exclude large datasets)
+*.npy
+*.npz
+*.csv
+*.json
+*.txt
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.tiff
+
+# Results directories (exclude large result files but keep essential ones)
+achieve_95_results/
+advanced_models/
+baseline_models/
+deep_learning_models/
+final_95_results/
+final_95_results_monitored/
+final_push_95_results/
+gpu_optimized_cnn_mlp_97_results/
+gpu_optimized_results/
+high_accuracy_models/
+purdue_results/
+ultimate_hybrid_results/
+ultimate_results/
+ultra_models/
+xgboost_gpu_results/
+
+# Keep essential ensemble result files and metadata
+!ensemble_95_results_advanced/advanced_ensemble_results.txt
+!ensemble_95_results_fast/fast_ensemble_results.txt
+!ensemble_95_results_gpu_k80/gpu_k80_ensemble_results.txt
+!ensemble_95_results_ultra/ultra_fast_ensemble_results.txt
+!ensemble_95_results_ultra/models/Stacking_Top5_Ridge_model.pkl
+!README.md
+!requirements.txt
+
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# GPU specific
+*.cuda
+*.cudnn
+
+# Streamlit
+.streamlit/
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

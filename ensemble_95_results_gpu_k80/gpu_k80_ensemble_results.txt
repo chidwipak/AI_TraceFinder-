@@ -1,0 +1,10 @@
+GPU ENSEMBLE 95%+ ACCURACY RESULTS (Tesla K80)
+==================================================
+
+Total Time: 0:08:54.764944
+
+Base_Models_Ensemble: 0.9135 (91.35%)
+Stacking_Ensemble: 0.9135 (91.35%)
+Weighted_Voting_Ensemble: 0.9054 (90.54%)
+Hybrid_Ensemble_GPU_CPU: 0.8990 (89.90%)
+Neural_Ensemble_GPU: 0.8734 (87.34%)
