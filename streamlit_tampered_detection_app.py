@@ -213,6 +213,7 @@ def create_header():
     <div class="info-box">
     <strong>Welcome to AI TraceFinder!</strong><br>
     This system uses advanced forensic analysis to detect tampered vs original images with 83.3% overall accuracy.
+    <strong>Note:</strong> For best results, upload TIFF images as the model was trained on TIFF format from the SUPATLANTIQUE dataset.
     Upload an image below to get started with tampering detection.
     </div>
     """, unsafe_allow_html=True)
@@ -252,8 +253,8 @@ def create_upload_section():
     
     uploaded_file = st.file_uploader(
         "Choose an image file",
-        type=['png', 'jpg', 'jpeg'],
-        help="Upload a PNG, JPG, or JPEG image for tampering detection"
+        type=['tiff', 'tif', 'png', 'jpg', 'jpeg'],
+        help="Upload a TIFF, PNG, JPG, or JPEG image for tampering detection (TIFF recommended for best accuracy)"
     )
     
     return uploaded_file
@@ -321,6 +322,7 @@ def create_sidebar():
         
         st.markdown("""
         **Supported Formats:**
+        - TIFF/TIF (Recommended)
         - PNG
         - JPG/JPEG
         - Maximum size: 10MB
