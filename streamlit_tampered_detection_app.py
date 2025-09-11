@@ -393,10 +393,18 @@ class TamperedImageDetector:
     def preprocess_features(self, features):
         """Preprocess features for model prediction"""
         try:
-            if self.scaler:
-                features_scaled = self.scaler.transform(features)
+            # Select the same 30 features that were used during training
+            if self.feature_indices:
+                features_selected = features[:, self.feature_indices]
             else:
-                features_scaled = features
+                # Fallback to first 30 features if no indices available
+                features_selected = features[:, :30]
+            
+            # Apply scaling
+            if self.scaler:
+                features_scaled = self.scaler.transform(features_selected)
+            else:
+                features_scaled = features_selected
             
             return features_scaled
         except Exception as e:
@@ -460,7 +468,8 @@ def create_model_info_section():
         st.metric("Original Images", "66.7% Accuracy")
     
     with col3:
-        st.metric("Features Used", "105")
+        st.metric("Features Extracted", "105")
+        st.metric("Features Used", "30")
         st.metric("Ensemble Method", "Soft Voting")
     
     st.markdown("""
@@ -469,7 +478,8 @@ def create_model_info_section():
     • <strong>Algorithm</strong>: Robust Ensemble combining 5 models (RandomForest, LightGBM, XGBoost, SVM, LogisticRegression)<br>
     • <strong>Ensemble Method</strong>: Soft voting for probability-based predictions<br>
     • <strong>Class Balancing</strong>: SMOTE+ENN for improved original image detection<br>
-    • <strong>Feature Selection</strong>: 105 comprehensive forensic features<br>
+    • <strong>Feature Extraction</strong>: 105 comprehensive forensic features<br>
+    • <strong>Feature Selection</strong>: 30 most important features used for prediction<br>
     • <strong>Performance</strong>: 83.3% overall accuracy with balanced performance
     </div>
     """, unsafe_allow_html=True)
