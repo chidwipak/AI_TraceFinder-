@@ -33,10 +33,10 @@ st.markdown("""
         color: #ffffff;
     }
     
-    /* Sidebar styling */
+    /* Sidebar styling - Simple and Clean */
     .css-1d391kg, .css-1cypcdb, .css-17eq0hr {
-        background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%) !important;
-        border-right: 2px solid #404040 !important;
+        background: #f8f9fa !important;
+        border-right: 1px solid #dee2e6 !important;
     }
     
     /* Sidebar content */
@@ -46,14 +46,14 @@ st.markdown("""
     
     /* Sidebar text */
     .css-1d391kg .stMarkdown, .css-1cypcdb .stMarkdown, .css-17eq0hr .stMarkdown {
-        color: #ffffff !important;
+        color: #212529 !important;
     }
     
     /* Sidebar headers */
     .css-1d391kg h1, .css-1d391kg h2, .css-1d391kg h3, 
     .css-1cypcdb h1, .css-1cypcdb h2, .css-1cypcdb h3,
     .css-17eq0hr h1, .css-17eq0hr h2, .css-17eq0hr h3 {
-        color: #00d4ff !important;
+        color: #495057 !important;
     }
     
     /* Main content area */
@@ -164,35 +164,33 @@ st.markdown("""
         transform: translateY(-2px);
     }
     
-    /* Sidebar metrics */
+    /* Sidebar metrics - Simple and Clean */
     .stMetric {
-        background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%) !important;
-        border: 1px solid #404040 !important;
-        border-radius: 10px !important;
-        padding: 1rem !important;
-        margin: 0.5rem 0 !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+        background: transparent !important;
+        border: none !important;
+        padding: 0.5rem 0 !important;
+        margin: 0.3rem 0 !important;
     }
     
     /* Sidebar metric labels */
     .stMetric > div > div > div {
-        color: #ffffff !important;
+        color: #6c757d !important;
+        font-size: 0.9rem !important;
     }
     
     /* Sidebar metric values */
     .stMetric > div > div > div > div {
-        color: #00d4ff !important;
-        font-weight: bold !important;
+        color: #212529 !important;
+        font-weight: 600 !important;
+        font-size: 1.1rem !important;
     }
     
-    /* Sidebar markdown containers */
+    /* Sidebar markdown containers - Clean */
     .css-1d391kg .stMarkdown, .css-1cypcdb .stMarkdown, .css-17eq0hr .stMarkdown {
-        background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%) !important;
-        border: 1px solid #404040 !important;
-        border-radius: 10px !important;
-        padding: 1rem !important;
+        background: transparent !important;
+        border: none !important;
+        padding: 0.5rem 0 !important;
         margin: 0.5rem 0 !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
     }
     
     /* Sidebar block containers */
@@ -331,10 +329,10 @@ st.markdown("""
         border-bottom: 2px solid #404040 !important;
     }
     
-    /* All Streamlit elements */
+    /* All Streamlit elements - Clean Sidebar */
     div[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%) !important;
-        border-right: 2px solid #404040 !important;
+        background: #f8f9fa !important;
+        border-right: 1px solid #dee2e6 !important;
     }
     
     div[data-testid="stSidebar"] > div {
@@ -342,21 +340,17 @@ st.markdown("""
     }
     
     div[data-testid="stSidebar"] .stMarkdown {
-        background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%) !important;
-        border: 1px solid #404040 !important;
-        border-radius: 10px !important;
-        padding: 1rem !important;
+        background: transparent !important;
+        border: none !important;
+        padding: 0.5rem 0 !important;
         margin: 0.5rem 0 !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
     }
     
     div[data-testid="stSidebar"] .stMetric {
-        background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%) !important;
-        border: 1px solid #404040 !important;
-        border-radius: 10px !important;
-        padding: 1rem !important;
-        margin: 0.5rem 0 !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+        background: transparent !important;
+        border: none !important;
+        padding: 0.5rem 0 !important;
+        margin: 0.3rem 0 !important;
     }
     
     /* Main content area */
@@ -429,23 +423,23 @@ st.markdown("""
     div[data-testid="stSidebar"] h1, 
     div[data-testid="stSidebar"] h2, 
     div[data-testid="stSidebar"] h3 {
-        color: #00d4ff !important;
+        color: #495057 !important;
     }
     
     /* Sidebar text */
     div[data-testid="stSidebar"] .stMarkdown {
-        color: #ffffff !important;
+        color: #212529 !important;
     }
     
     /* Sidebar metric values */
     div[data-testid="stSidebar"] .stMetric > div > div > div > div {
-        color: #00d4ff !important;
-        font-weight: bold !important;
+        color: #212529 !important;
+        font-weight: 600 !important;
     }
     
     /* Sidebar metric labels */
     div[data-testid="stSidebar"] .stMetric > div > div > div {
-        color: #ffffff !important;
+        color: #6c757d !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -965,42 +959,19 @@ def main():
     # Initialize detector
     detector = TamperedImageDetector()
     
-    # Sidebar
-    st.sidebar.markdown("## 📊 Model Information")
+    # Sidebar - Simple and Clean
+    st.sidebar.markdown("## 📊 Model Performance")
+    st.sidebar.metric("Overall Accuracy", "71.4%")
+    st.sidebar.metric("Tampered Detection", "95.2%")
+    st.sidebar.metric("Original Detection", "0%")
     
-    col1, col2, col3 = st.sidebar.columns(3)
-    with col1:
-        st.metric("Overall Accuracy", "71.4%")
-        st.metric("Tampered Detection", "95.2%")
-        st.metric("Original Detection", "0%")
-    with col2:
-        st.metric("Model Type", "LightGBM")
-        st.metric("Training Images", "1,200+")
-        st.metric("Test Images", "28")
-    with col3:
-        st.metric("Features Extracted", "105")
-        st.metric("Features Used", "30")
-        st.metric("Scaler", "StandardScaler")
+    st.sidebar.markdown("## 🤖 Model Details")
+    st.sidebar.markdown("**Model:** LightGBM Classifier")
+    st.sidebar.markdown("**Features:** 30 selected from 105 total")
+    st.sidebar.markdown("**Training:** 1,200+ images")
     
-    st.sidebar.markdown("## 🎯 Model Details")
-    st.sidebar.markdown("""
-    **Model:**
-    - LightGBM Classifier
-    - StandardScaler preprocessing
-    - 30 selected features from 105 total
-    
-    **Performance:**
-    - Excellent tampered detection (95.2%)
-    - Limited original detection (0%)
-    - Overall accuracy: 71.4%
-    """)
-    
-    st.sidebar.markdown("## 📋 Supported Formats")
-    st.sidebar.markdown("""
-    - TIFF/TIF (Recommended)
-    - PNG
-    - JPG/JPEG
-    """)
+    st.sidebar.markdown("## 📁 Supported Formats")
+    st.sidebar.markdown("TIFF, PNG, JPG, JPEG")
     
     # Main content
     st.markdown("""
