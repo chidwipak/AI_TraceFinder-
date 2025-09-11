@@ -1,0 +1,341 @@
+{
+  "dataset_structure": {
+    "tampered_images": {
+      "copy_move": 34,
+      "retouching": 34,
+      "splicing": 34
+    },
+    "original_images": {
+      "tampered_originals": 34,
+      "official_originals": 100,
+      "wikipedia_originals": 108
+    },
+    "binary_masks": {
+      "copy_move_masks": 34,
+      "retouching_masks": 34,
+      "splicing_masks": 34
+    }
+  },
+  "image_properties": {
+    "tampered": [
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Tampered/Copy-move/s11_29_b.tif",
+        "width": 2481,
+        "height": 3471,
+        "channels": 3,
+        "size_mb": 24.65630340576172,
+        "type": "Copy-move"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Tampered/Copy-move/s9_51_b.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.909313201904297,
+        "type": "Copy-move"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Tampered/Copy-move/s9_52_b.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.91097640991211,
+        "type": "Copy-move"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Tampered/Copy-move/s1_84_b.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.909385681152344,
+        "type": "Copy-move"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Tampered/Copy-move/s1_81_b.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.909603118896484,
+        "type": "Copy-move"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Tampered/Copy-move/s11_38_b.tif",
+        "width": 2481,
+        "height": 3487,
+        "channels": 3,
+        "size_mb": 24.77027130126953,
+        "type": "Copy-move"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Tampered/Retouching/s11_30_c.tif",
+        "width": 2481,
+        "height": 3487,
+        "channels": 3,
+        "size_mb": 24.770702362060547,
+        "type": "Retouching"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Tampered/Retouching/s9_63_c.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.910186767578125,
+        "type": "Retouching"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Tampered/Retouching/s9_62_c.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.909934997558594,
+        "type": "Retouching"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Tampered/Retouching/s9_61_c.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.90917205810547,
+        "type": "Retouching"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Tampered/Retouching/s1_84_c.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.909385681152344,
+        "type": "Retouching"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Tampered/Retouching/s9_60_c.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.911487579345703,
+        "type": "Retouching"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Tampered/Splicing/s9_62_a.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.909961700439453,
+        "type": "Splicing"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Tampered/Splicing/s9_51_a.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.90930938720703,
+        "type": "Splicing"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Tampered/Splicing/s1_82_a.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.909732818603516,
+        "type": "Splicing"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Tampered/Splicing/s1_74_a.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 32.13335037231445,
+        "type": "Splicing"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Tampered/Splicing/s9_59_a.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.910350799560547,
+        "type": "Splicing"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Tampered/Splicing/s1_79_a.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.909561157226562,
+        "type": "Splicing"
+      }
+    ],
+    "original": [
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Original/s9_67.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.89753246307373,
+        "type": "original"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Original/s9_63.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.89753246307373,
+        "type": "original"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Original/s1_83.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.897526741027832,
+        "type": "original"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Original/s11_19.tif",
+        "width": 2481,
+        "height": 3487,
+        "channels": 3,
+        "size_mb": 24.75846576690674,
+        "type": "original"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Original/s9_60.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.89753246307373,
+        "type": "original"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Original/s1_84.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.897526741027832,
+        "type": "original"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Original/s1_71.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.897526741027832,
+        "type": "original"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Original/s9_59.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.89753246307373,
+        "type": "original"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Original/s1_96.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.897526741027832,
+        "type": "original"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Original/s11_27.tif",
+        "width": 2481,
+        "height": 3487,
+        "channels": 3,
+        "size_mb": 24.75846576690674,
+        "type": "original"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Original/s1_70.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.897526741027832,
+        "type": "original"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Original/s1_78.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.897526741027832,
+        "type": "original"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Original/s1_72.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.897526741027832,
+        "type": "original"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Original/s11_35.tif",
+        "width": 2481,
+        "height": 3487,
+        "channels": 3,
+        "size_mb": 24.75846576690674,
+        "type": "original"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Original/s9_52.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.89753246307373,
+        "type": "original"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Original/s1_81.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.897526741027832,
+        "type": "original"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Original/s9_62.tif",
+        "width": 2480,
+        "height": 3508,
+        "channels": 3,
+        "size_mb": 24.89753246307373,
+        "type": "original"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Original/s11_4.tif",
+        "width": 2481,
+        "height": 3487,
+        "channels": 3,
+        "size_mb": 24.75846576690674,
+        "type": "original"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Original/s11_49.tif",
+        "width": 2481,
+        "height": 3471,
+        "channels": 3,
+        "size_mb": 24.644864082336426,
+        "type": "original"
+      },
+      {
+        "path": "/home/mohanganesh/AI_TraceFinder/The SUPATLANTIQUE dataset/Tampered images/Original/s11_29.tif",
+        "width": 2481,
+        "height": 3471,
+        "channels": 3,
+        "size_mb": 24.644864082336426,
+        "type": "original"
+      }
+    ]
+  },
+  "data_inventory_summary": {
+    "total_images": 136,
+    "tampered_count": 102,
+    "original_count": 34
+  },
+  "recommendations": [
+    "Dataset is well-balanced with multiple tampering types",
+    "Binary masks available for precise localization",
+    "Suitable for both binary classification and multi-class tampering type detection",
+    "Consider data augmentation to increase dataset size",
+    "Use transfer learning for better performance with limited data"
+  ]
+}
