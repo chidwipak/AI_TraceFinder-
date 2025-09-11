@@ -370,7 +370,7 @@ class TamperedImageDetector:
             return [0.0] * 25
     
     def extract_all_features(self, image):
-        """Extract all 105 forensic features from an image"""
+        """Extract all 105 forensic features from an image - matching exact training order"""
         try:
             # Convert PIL to OpenCV format
             if isinstance(image, Image.Image):
@@ -380,48 +380,161 @@ class TamperedImageDetector:
             image = cv2.resize(image, (224, 224))
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
             
-            # Extract all feature categories
-            features = []
-            features.extend(self.extract_ela_features(image))  # 11 features
-            features.extend(self.extract_noise_features(image))  # 7 features
-            features.extend(self.extract_compression_features(image))  # 7 features
-            features.extend(self.extract_frequency_features(image))  # 6 features
-            features.extend(self.extract_statistical_features(image))  # 25 features
-            features.extend(self.extract_texture_features(image))  # 25 features
+            # Initialize features dictionary to match training order
+            features = {}
             
-            # Add additional features to reach 105
+            # 1. ELA features (11 features)
+            ela_features = self.extract_ela_features(image)
+            ela_names = ['ela_mean', 'ela_std', 'ela_max', 'ela_skew', 'ela_kurtosis', 
+                        'ela_R_mean', 'ela_R_std', 'ela_G_mean', 'ela_G_std', 'ela_B_mean', 'ela_B_std']
+            for i, name in enumerate(ela_names):
+                features[name] = ela_features[i]
+            
+            # 2. Noise features (7 features)
+            noise_features = self.extract_noise_features(image)
+            noise_names = ['noise_mean', 'noise_std', 'noise_variance', 'noise_skew', 'noise_kurtosis', 
+                          'laplacian_variance', 'sobel_variance']
+            for i, name in enumerate(noise_names):
+                features[name] = noise_features[i]
+            
+            # 3. Compression features (7 features)
+            comp_features = self.extract_compression_features(image)
+            comp_names = ['dct_mean', 'dct_std', 'dct_energy', 'high_freq_dct_mean', 'high_freq_dct_std', 
+                         'blocking_artifacts_h', 'blocking_artifacts_v']
+            for i, name in enumerate(comp_names):
+                features[name] = comp_features[i]
+            
+            # 4. Frequency features (6 features)
+            freq_features = self.extract_frequency_features(image)
+            freq_names = ['fft_mean', 'fft_std', 'fft_energy', 'high_freq_energy', 'high_freq_ratio', 'spectral_centroid']
+            for i, name in enumerate(freq_names):
+                features[name] = freq_features[i]
+            
+            # 5. Additional features to match training (remaining features)
             gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+            
+            # Gabor features
+            gabor_responses = []
+            for theta in range(0, 180, 45):
+                gabor_filter = gabor(gray, frequency=0.1, theta=theta, sigma_x=1, sigma_y=1)
+                gabor_responses.append(gabor_filter[0])
+            
+            gabor_combined = np.concatenate(gabor_responses)
+            features['gabor_mean'] = np.mean(gabor_combined)
+            features['gabor_std'] = np.std(gabor_combined)
+            features['gabor_energy'] = np.sum(gabor_combined**2)
+            
+            # Texture features (GLCM)
+            glcm = feature.graycomatrix(gray, distances=[1], angles=[0, 45, 90, 135], levels=256, symmetric=True, normed=True)
+            features['contrast'] = np.mean(feature.graycoprops(glcm, 'contrast'))
+            features['dissimilarity'] = np.mean(feature.graycoprops(glcm, 'dissimilarity'))
+            features['homogeneity'] = np.mean(feature.graycoprops(glcm, 'homogeneity'))
+            features['energy'] = np.mean(feature.graycoprops(glcm, 'energy'))
+            
+            # Color features for each channel
+            for i, channel in enumerate(['R', 'G', 'B']):
+                channel_data = image[:, :, i]
+                features[f'{channel}_mean'] = np.mean(channel_data)
+                features[f'{channel}_std'] = np.std(channel_data)
+                features[f'{channel}_skew'] = skew(channel_data.flatten())
+                features[f'{channel}_kurtosis'] = kurtosis(channel_data.flatten())
+                features[f'{channel}_min'] = np.min(channel_data)
+                features[f'{channel}_max'] = np.max(channel_data)
+                features[f'{channel}_median'] = np.median(channel_data)
+            
+            # Overall color features
+            features['overall_mean'] = np.mean(image)
+            features['overall_std'] = np.std(image)
+            features['overall_skew'] = skew(image.flatten())
+            features['overall_kurtosis'] = kurtosis(image.flatten())
             
             # Edge features
             edges = cv2.Canny(gray, 50, 150)
-            edge_features = [
-                np.mean(edges),
-                np.std(edges),
-                np.sum(edges > 0),
-                np.var(edges)
-            ]
-            features.extend(edge_features)
+            features['edge_density'] = np.sum(edges > 0) / edges.size
+            features['edge_mean'] = np.mean(edges)
             
-            # Color features
-            color_features = [
-                np.mean(image[:, :, 0]),  # R mean
-                np.std(image[:, :, 0]),   # R std
-                np.mean(image[:, :, 1]),  # G mean
-                np.std(image[:, :, 1]),   # G std
-                np.mean(image[:, :, 2]),  # B mean
-                np.std(image[:, :, 2]),   # B std
-                np.mean(image),           # Overall mean
-                np.std(image)             # Overall std
-            ]
-            features.extend(color_features)
+            # Sobel features
+            sobel_x = cv2.Sobel(gray, cv2.CV_64F, 1, 0, ksize=3)
+            sobel_y = cv2.Sobel(gray, cv2.CV_64F, 0, 1, ksize=3)
+            sobel_magnitude = np.sqrt(sobel_x**2 + sobel_y**2)
+            sobel_direction = np.arctan2(sobel_y, sobel_x)
             
-            # Ensure we have exactly 105 features
-            while len(features) < 105:
-                features.append(0.0)
-            features = features[:105]
+            features['sobel_magnitude_mean'] = np.mean(sobel_magnitude)
+            features['sobel_magnitude_std'] = np.std(sobel_magnitude)
+            features['sobel_direction_mean'] = np.mean(sobel_direction)
+            features['sobel_direction_std'] = np.std(sobel_direction)
             
-            return np.array(features)
+            # Laplacian features
+            laplacian = cv2.Laplacian(gray, cv2.CV_64F)
+            features['laplacian_mean'] = np.mean(laplacian)
+            features['laplacian_std'] = np.std(laplacian)
+            features['laplacian_energy'] = np.sum(laplacian**2)
+            
+            # HSV features
+            hsv = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
+            for i, channel in enumerate(['H', 'S', 'V']):
+                channel_data = hsv[:, :, i]
+                features[f'hsv_{channel}_mean'] = np.mean(channel_data)
+                features[f'hsv_{channel}_std'] = np.std(channel_data)
+                features[f'hsv_{channel}_skew'] = skew(channel_data.flatten())
+            
+            # Color moments
+            features['color_moment_1'] = np.mean(image)
+            features['color_moment_2'] = np.std(image)
+            features['color_moment_3'] = skew(image.flatten())
+            
+            # Histogram entropy
+            for i, channel in enumerate(['r', 'g', 'b']):
+                hist, _ = np.histogram(image[:, :, i], bins=256, range=(0, 256))
+                hist = hist / hist.sum()
+                hist = hist[hist > 0]  # Remove zeros
+                entropy = -np.sum(hist * np.log2(hist))
+                features[f'hist_{channel}_entropy'] = entropy
+            
+            # Wavelet features
+            coeffs = pywt.dwt2(gray, 'haar')
+            cA, (cH, cV, cD) = coeffs
+            
+            features['wavelet_LL_mean'] = np.mean(cA)
+            features['wavelet_LL_std'] = np.std(cA)
+            features['wavelet_LL_energy'] = np.sum(cA**2)
+            
+            features['wavelet_LH_mean'] = np.mean(cH)
+            features['wavelet_LH_std'] = np.std(cH)
+            features['wavelet_LH_energy'] = np.sum(cH**2)
+            
+            features['wavelet_HL_mean'] = np.mean(cV)
+            features['wavelet_HL_std'] = np.std(cV)
+            features['wavelet_HL_energy'] = np.sum(cV**2)
+            
+            features['wavelet_HH_mean'] = np.mean(cD)
+            features['wavelet_HH_std'] = np.std(cD)
+            features['wavelet_HH_energy'] = np.sum(cD**2)
+            
+            # Wavelet ratios
+            features['wavelet_LL_ratio'] = features['wavelet_LL_energy'] / (features['wavelet_LL_energy'] + features['wavelet_LH_energy'] + features['wavelet_HL_energy'] + features['wavelet_HH_energy'])
+            features['wavelet_HH_ratio'] = features['wavelet_HH_energy'] / (features['wavelet_LL_energy'] + features['wavelet_LH_energy'] + features['wavelet_HL_energy'] + features['wavelet_HH_energy'])
+            
+            # LBP features
+            lbp = feature.local_binary_pattern(gray, 8, 1, method='uniform')
+            features['lbp_mean'] = np.mean(lbp)
+            features['lbp_std'] = np.std(lbp)
+            features['lbp_energy'] = np.sum(lbp**2)
+            features['lbp_entropy'] = -np.sum((lbp / lbp.sum()) * np.log2((lbp / lbp.sum()) + 1e-10))
+            
+            # Convert to array in the exact order as training
+            feature_names = ['ela_mean', 'ela_std', 'ela_max', 'ela_skew', 'ela_kurtosis', 'ela_R_mean', 'ela_R_std', 'ela_G_mean', 'ela_G_std', 'ela_B_mean', 'ela_B_std', 'noise_mean', 'noise_std', 'noise_variance', 'noise_skew', 'noise_kurtosis', 'laplacian_variance', 'sobel_variance', 'dct_mean', 'dct_std', 'dct_energy', 'high_freq_dct_mean', 'high_freq_dct_std', 'blocking_artifacts_h', 'blocking_artifacts_v', 'fft_mean', 'fft_std', 'fft_energy', 'high_freq_energy', 'high_freq_ratio', 'spectral_centroid', 'gabor_mean', 'gabor_std', 'gabor_energy', 'contrast', 'dissimilarity', 'homogeneity', 'energy', 'R_mean', 'R_std', 'R_skew', 'R_kurtosis', 'R_min', 'R_max', 'R_median', 'G_mean', 'G_std', 'G_skew', 'G_kurtosis', 'G_min', 'G_max', 'G_median', 'B_mean', 'B_std', 'B_skew', 'B_kurtosis', 'B_min', 'B_max', 'B_median', 'overall_mean', 'overall_std', 'overall_skew', 'overall_kurtosis', 'edge_density', 'edge_mean', 'sobel_magnitude_mean', 'sobel_magnitude_std', 'sobel_direction_mean', 'sobel_direction_std', 'laplacian_mean', 'laplacian_std', 'laplacian_energy', 'hsv_H_mean', 'hsv_H_std', 'hsv_H_skew', 'hsv_S_mean', 'hsv_S_std', 'hsv_S_skew', 'hsv_V_mean', 'hsv_V_std', 'hsv_V_skew', 'color_moment_1', 'color_moment_2', 'color_moment_3', 'hist_r_entropy', 'hist_g_entropy', 'hist_b_entropy', 'wavelet_LL_mean', 'wavelet_LL_std', 'wavelet_LL_energy', 'wavelet_LH_mean', 'wavelet_LH_std', 'wavelet_LH_energy', 'wavelet_HL_mean', 'wavelet_HL_std', 'wavelet_HL_energy', 'wavelet_HH_mean', 'wavelet_HH_std', 'wavelet_HH_energy', 'wavelet_LL_ratio', 'wavelet_HH_ratio', 'lbp_mean', 'lbp_std', 'lbp_energy', 'lbp_entropy']
+            
+            feature_array = []
+            for name in feature_names:
+                if name in features:
+                    feature_array.append(features[name])
+                else:
+                    feature_array.append(0.0)
+            
+            return np.array(feature_array)
         except Exception as e:
+            st.error(f"Error extracting features: {str(e)}")
             return np.zeros(105)
     
     def preprocess_features(self, features):
