@@ -34,9 +34,26 @@ st.markdown("""
     }
     
     /* Sidebar styling */
-    .css-1d391kg {
-        background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%);
-        border-right: 2px solid #404040;
+    .css-1d391kg, .css-1cypcdb, .css-17eq0hr {
+        background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+        border-right: 2px solid #404040 !important;
+    }
+    
+    /* Sidebar content */
+    .css-1d391kg .css-1v0mbdj, .css-1cypcdb .css-1v0mbdj, .css-17eq0hr .css-1v0mbdj {
+        background: transparent !important;
+    }
+    
+    /* Sidebar text */
+    .css-1d391kg .stMarkdown, .css-1cypcdb .stMarkdown, .css-17eq0hr .stMarkdown {
+        color: #ffffff !important;
+    }
+    
+    /* Sidebar headers */
+    .css-1d391kg h1, .css-1d391kg h2, .css-1d391kg h3, 
+    .css-1cypcdb h1, .css-1cypcdb h2, .css-1cypcdb h3,
+    .css-17eq0hr h1, .css-17eq0hr h2, .css-17eq0hr h3 {
+        color: #00d4ff !important;
     }
     
     /* Main content area */
@@ -149,21 +166,81 @@ st.markdown("""
     
     /* Sidebar metrics */
     .stMetric {
-        background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
-        border: 1px solid #404040;
-        border-radius: 10px;
-        padding: 1rem;
-        margin: 0.5rem 0;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%) !important;
+        border: 1px solid #404040 !important;
+        border-radius: 10px !important;
+        padding: 1rem !important;
+        margin: 0.5rem 0 !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+    }
+    
+    /* Sidebar metric labels */
+    .stMetric > div > div > div {
+        color: #ffffff !important;
+    }
+    
+    /* Sidebar metric values */
+    .stMetric > div > div > div > div {
+        color: #00d4ff !important;
+        font-weight: bold !important;
+    }
+    
+    /* Sidebar markdown containers */
+    .css-1d391kg .stMarkdown, .css-1cypcdb .stMarkdown, .css-17eq0hr .stMarkdown {
+        background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%) !important;
+        border: 1px solid #404040 !important;
+        border-radius: 10px !important;
+        padding: 1rem !important;
+        margin: 0.5rem 0 !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+    }
+    
+    /* Sidebar block containers */
+    .css-1d391kg .block-container, .css-1cypcdb .block-container, .css-17eq0hr .block-container {
+        background: transparent !important;
+        padding: 0.5rem !important;
     }
     
     /* Text styling */
     .stMarkdown {
-        color: #ffffff;
+        color: #ffffff !important;
     }
     
     .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
-        color: #ffffff;
+        color: #ffffff !important;
+    }
+    
+    /* Main content text */
+    .main .stMarkdown {
+        color: #ffffff !important;
+    }
+    
+    .main .stMarkdown h1, .main .stMarkdown h2, .main .stMarkdown h3 {
+        color: #ffffff !important;
+    }
+    
+    /* Block containers */
+    .block-container {
+        background: transparent !important;
+    }
+    
+    /* Main content area */
+    .main .block-container {
+        background: transparent !important;
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+    
+    /* Columns */
+    .stColumn {
+        background: transparent !important;
+    }
+    
+    /* File uploader area */
+    .uploadedFile {
+        background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%) !important;
+        border: 1px solid #404040 !important;
+        border-radius: 10px !important;
     }
     
     /* Chart styling */
@@ -246,6 +323,129 @@ st.markdown("""
     
     ::-webkit-scrollbar-thumb:hover {
         background: linear-gradient(45deg, #0099cc, #0066ff);
+    }
+    
+    /* Comprehensive Streamlit dark theme */
+    .stApp > header {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+        border-bottom: 2px solid #404040 !important;
+    }
+    
+    /* All Streamlit elements */
+    div[data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+        border-right: 2px solid #404040 !important;
+    }
+    
+    div[data-testid="stSidebar"] > div {
+        background: transparent !important;
+    }
+    
+    div[data-testid="stSidebar"] .stMarkdown {
+        background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%) !important;
+        border: 1px solid #404040 !important;
+        border-radius: 10px !important;
+        padding: 1rem !important;
+        margin: 0.5rem 0 !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+    }
+    
+    div[data-testid="stSidebar"] .stMetric {
+        background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%) !important;
+        border: 1px solid #404040 !important;
+        border-radius: 10px !important;
+        padding: 1rem !important;
+        margin: 0.5rem 0 !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+    }
+    
+    /* Main content area */
+    div[data-testid="stAppViewContainer"] {
+        background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 50%, #2d2d2d 100%) !important;
+    }
+    
+    div[data-testid="stAppViewContainer"] .main .block-container {
+        background: transparent !important;
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+    
+    /* File uploader */
+    div[data-testid="stFileUploader"] {
+        background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%) !important;
+        border: 2px dashed #666 !important;
+        border-radius: 15px !important;
+        padding: 2rem !important;
+    }
+    
+    div[data-testid="stFileUploader"]:hover {
+        border-color: #00d4ff !important;
+        background: linear-gradient(135deg, #2a3a3a 0%, #3a4a4a 100%) !important;
+    }
+    
+    /* Buttons */
+    div[data-testid="stButton"] > button {
+        background: linear-gradient(45deg, #00d4ff, #0099cc) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 25px !important;
+        padding: 0.5rem 2rem !important;
+        font-weight: 600 !important;
+        box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3) !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    div[data-testid="stButton"] > button:hover {
+        background: linear-gradient(45deg, #0099cc, #0066ff) !important;
+        box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4) !important;
+        transform: translateY(-2px) !important;
+    }
+    
+    /* Images */
+    div[data-testid="stImage"] {
+        border-radius: 15px !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+        border: 2px solid #404040 !important;
+    }
+    
+    /* Charts */
+    div[data-testid="stPlotlyChart"] {
+        background: transparent !important;
+        border-radius: 15px !important;
+        padding: 1rem !important;
+    }
+    
+    /* All text elements */
+    .stMarkdown, .stText, .stSelectbox label, .stTextInput label {
+        color: #ffffff !important;
+    }
+    
+    /* Headers */
+    h1, h2, h3, h4, h5, h6 {
+        color: #ffffff !important;
+    }
+    
+    /* Sidebar headers */
+    div[data-testid="stSidebar"] h1, 
+    div[data-testid="stSidebar"] h2, 
+    div[data-testid="stSidebar"] h3 {
+        color: #00d4ff !important;
+    }
+    
+    /* Sidebar text */
+    div[data-testid="stSidebar"] .stMarkdown {
+        color: #ffffff !important;
+    }
+    
+    /* Sidebar metric values */
+    div[data-testid="stSidebar"] .stMetric > div > div > div > div {
+        color: #00d4ff !important;
+        font-weight: bold !important;
+    }
+    
+    /* Sidebar metric labels */
+    div[data-testid="stSidebar"] .stMetric > div > div > div {
+        color: #ffffff !important;
     }
 </style>
 """, unsafe_allow_html=True)
