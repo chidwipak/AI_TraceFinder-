@@ -33,28 +33,7 @@ st.markdown("""
         color: #ffffff;
     }
     
-    /* Sidebar styling - Simple and Clean */
-    .css-1d391kg, .css-1cypcdb, .css-17eq0hr {
-        background: #f8f9fa !important;
-        border-right: 1px solid #dee2e6 !important;
-    }
-    
-    /* Sidebar content */
-    .css-1d391kg .css-1v0mbdj, .css-1cypcdb .css-1v0mbdj, .css-17eq0hr .css-1v0mbdj {
-        background: transparent !important;
-    }
-    
-    /* Sidebar text */
-    .css-1d391kg .stMarkdown, .css-1cypcdb .stMarkdown, .css-17eq0hr .stMarkdown {
-        color: #212529 !important;
-    }
-    
-    /* Sidebar headers */
-    .css-1d391kg h1, .css-1d391kg h2, .css-1d391kg h3, 
-    .css-1cypcdb h1, .css-1cypcdb h2, .css-1cypcdb h3,
-    .css-17eq0hr h1, .css-17eq0hr h2, .css-17eq0hr h3 {
-        color: #495057 !important;
-    }
+    /* Sidebar removed - no styling needed */
     
     /* Main content area */
     .main .block-container {
@@ -164,40 +143,7 @@ st.markdown("""
         transform: translateY(-2px);
     }
     
-    /* Sidebar metrics - Simple and Clean */
-    .stMetric {
-        background: transparent !important;
-        border: none !important;
-        padding: 0.5rem 0 !important;
-        margin: 0.3rem 0 !important;
-    }
-    
-    /* Sidebar metric labels */
-    .stMetric > div > div > div {
-        color: #6c757d !important;
-        font-size: 0.9rem !important;
-    }
-    
-    /* Sidebar metric values */
-    .stMetric > div > div > div > div {
-        color: #212529 !important;
-        font-weight: 600 !important;
-        font-size: 1.1rem !important;
-    }
-    
-    /* Sidebar markdown containers - Clean */
-    .css-1d391kg .stMarkdown, .css-1cypcdb .stMarkdown, .css-17eq0hr .stMarkdown {
-        background: transparent !important;
-        border: none !important;
-        padding: 0.5rem 0 !important;
-        margin: 0.5rem 0 !important;
-    }
-    
-    /* Sidebar block containers */
-    .css-1d391kg .block-container, .css-1cypcdb .block-container, .css-17eq0hr .block-container {
-        background: transparent !important;
-        padding: 0.5rem !important;
-    }
+    /* Sidebar removed - no metric styling needed */
     
     /* Text styling */
     .stMarkdown {
@@ -329,29 +275,7 @@ st.markdown("""
         border-bottom: 2px solid #404040 !important;
     }
     
-    /* All Streamlit elements - Clean Sidebar */
-    div[data-testid="stSidebar"] {
-        background: #f8f9fa !important;
-        border-right: 1px solid #dee2e6 !important;
-    }
-    
-    div[data-testid="stSidebar"] > div {
-        background: transparent !important;
-    }
-    
-    div[data-testid="stSidebar"] .stMarkdown {
-        background: transparent !important;
-        border: none !important;
-        padding: 0.5rem 0 !important;
-        margin: 0.5rem 0 !important;
-    }
-    
-    div[data-testid="stSidebar"] .stMetric {
-        background: transparent !important;
-        border: none !important;
-        padding: 0.5rem 0 !important;
-        margin: 0.3rem 0 !important;
-    }
+    /* Sidebar removed - no styling needed */
     
     /* Main content area */
     div[data-testid="stAppViewContainer"] {
@@ -419,28 +343,7 @@ st.markdown("""
         color: #ffffff !important;
     }
     
-    /* Sidebar headers */
-    div[data-testid="stSidebar"] h1, 
-    div[data-testid="stSidebar"] h2, 
-    div[data-testid="stSidebar"] h3 {
-        color: #495057 !important;
-    }
-    
-    /* Sidebar text */
-    div[data-testid="stSidebar"] .stMarkdown {
-        color: #212529 !important;
-    }
-    
-    /* Sidebar metric values */
-    div[data-testid="stSidebar"] .stMetric > div > div > div > div {
-        color: #212529 !important;
-        font-weight: 600 !important;
-    }
-    
-    /* Sidebar metric labels */
-    div[data-testid="stSidebar"] .stMetric > div > div > div {
-        color: #6c757d !important;
-    }
+    /* Sidebar removed - no styling needed */
 </style>
 """, unsafe_allow_html=True)
 
@@ -959,25 +862,38 @@ def main():
     # Initialize detector
     detector = TamperedImageDetector()
     
-    # Sidebar - Simple and Clean
-    st.sidebar.markdown("## 📊 Model Performance")
-    st.sidebar.metric("Overall Accuracy", "71.4%")
-    st.sidebar.metric("Tampered Detection", "95.2%")
-    st.sidebar.metric("Original Detection", "0%")
+    # No sidebar - moved all info to main content area
     
-    st.sidebar.markdown("## 🤖 Model Details")
-    st.sidebar.markdown("**Model:** LightGBM Classifier")
-    st.sidebar.markdown("**Features:** 30 selected from 105 total")
-    st.sidebar.markdown("**Training:** 1,200+ images")
-    
-    st.sidebar.markdown("## 📁 Supported Formats")
-    st.sidebar.markdown("TIFF, PNG, JPG, JPEG")
+    # Model Information
+    st.markdown("""
+    <div style="text-align: center; margin: 2rem 0; padding: 1.5rem; background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%); border-radius: 15px; border: 1px solid #404040;">
+        <h3 style="color: #00d4ff; margin-bottom: 1rem;">📊 Model Performance</h3>
+        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1rem;">
+            <div style="text-align: center;">
+                <div style="color: #ffffff; font-size: 1.5rem; font-weight: bold;">71.4%</div>
+                <div style="color: #cccccc; font-size: 0.9rem;">Overall Accuracy</div>
+            </div>
+            <div style="text-align: center;">
+                <div style="color: #4caf50; font-size: 1.5rem; font-weight: bold;">95.2%</div>
+                <div style="color: #cccccc; font-size: 0.9rem;">Tampered Detection</div>
+            </div>
+            <div style="text-align: center;">
+                <div style="color: #ff6b6b; font-size: 1.5rem; font-weight: bold;">0%</div>
+                <div style="color: #cccccc; font-size: 0.9rem;">Original Detection</div>
+            </div>
+        </div>
+        <div style="margin-top: 1rem; color: #cccccc; font-size: 0.9rem;">
+            <strong>Model:</strong> LightGBM Classifier | <strong>Features:</strong> 30 selected from 105 | <strong>Training:</strong> 108 images
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     
     # Main content
     st.markdown("""
     <div style="text-align: center; margin: 2rem 0;">
         <h2 style="color: #ff6b6b; font-size: 2.2rem; margin-bottom: 1rem; text-shadow: 0 0 20px rgba(255, 107, 107, 0.3);">🖼️ Upload Image for Analysis</h2>
         <p style="color: #cccccc; font-size: 1.1rem;">Upload an image to detect if it has been tampered with using advanced forensic analysis</p>
+        <p style="color: #888; font-size: 0.9rem; margin-top: 0.5rem;">Supported formats: TIFF, PNG, JPG, JPEG (TIFF recommended for best accuracy)</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -1065,7 +981,8 @@ def main():
         • **Overall Accuracy**: 71.4%
         • **Tampered Detection**: 95.2% (Excellent recall)
         • **Original Detection**: 0% (Limited precision)
-        • **Training Data**: 1,200+ images from SUPATLANTIQUE dataset
+        • **Training Data**: 108 images from SUPATLANTIQUE dataset
+        • **Test Data**: 28 images for evaluation
         • **Feature Extraction**: 105 comprehensive forensic features
         • **Feature Selection**: 30 most important features used for prediction
         """)
@@ -1077,7 +994,7 @@ def main():
         <p style="font-size: 1.1rem; margin-bottom: 1rem;"><strong>Note:</strong> For best results, upload TIFF images as the model was trained on TIFF format from the SUPATLANTIQUE dataset.</p>
         <p style="font-size: 1rem; margin-bottom: 1rem;">This system uses advanced forensic analysis to detect image tampering with high accuracy.</p>
         <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #404040;">
-            <p style="font-size: 0.9rem; color: #888;">Powered by LightGBM • 105 Forensic Features • 71.4% Accuracy</p>
+            <p style="font-size: 0.9rem; color: #888;">Powered by LightGBM • 108 Training Images • 71.4% Accuracy</p>
         </div>
     </div>
     """, unsafe_allow_html=True)
