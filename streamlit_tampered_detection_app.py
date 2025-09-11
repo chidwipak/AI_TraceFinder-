@@ -24,51 +24,228 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for better styling
+# Custom CSS for dark theme styling
 st.markdown("""
 <style>
+    /* Main app background */
+    .stApp {
+        background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 50%, #2d2d2d 100%);
+        color: #ffffff;
+    }
+    
+    /* Sidebar styling */
+    .css-1d391kg {
+        background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%);
+        border-right: 2px solid #404040;
+    }
+    
+    /* Main content area */
+    .main .block-container {
+        background: transparent;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    
+    /* Headers */
     .main-header {
-        font-size: 3rem;
-        color: #2E86AB;
+        font-size: 3.5rem;
+        background: linear-gradient(45deg, #00d4ff, #0099cc, #0066ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
         text-align: center;
         margin-bottom: 2rem;
-        font-weight: bold;
+        font-weight: 800;
+        text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+        letter-spacing: 2px;
     }
+    
     .sub-header {
-        font-size: 1.5rem;
-        color: #A23B72;
-        margin-bottom: 1rem;
-        font-weight: bold;
+        font-size: 1.8rem;
+        color: #ff6b6b;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+        text-align: center;
+        text-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
     }
+    
+    /* Metrics styling */
     .metric-container {
-        background-color: #f0f2f6;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        margin: 0.5rem 0;
+        background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
+        margin: 0.8rem 0;
+        border: 1px solid #404040;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
     }
+    
+    /* Success box */
     .success-box {
-        background-color: #d4edda;
-        border: 1px solid #c3e6cb;
-        color: #155724;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        margin: 1rem 0;
+        background: linear-gradient(135deg, #1e3a1e 0%, #2d5a2d 100%);
+        border: 2px solid #4caf50;
+        color: #a8e6a8;
+        padding: 1.5rem;
+        border-radius: 15px;
+        margin: 1.5rem 0;
+        box-shadow: 0 8px 32px rgba(76, 175, 80, 0.2);
+        backdrop-filter: blur(10px);
     }
+    
+    /* Error box */
     .error-box {
-        background-color: #f8d7da;
-        border: 1px solid #f5c6cb;
-        color: #721c24;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        margin: 1rem 0;
+        background: linear-gradient(135deg, #3a1e1e 0%, #5a2d2d 100%);
+        border: 2px solid #f44336;
+        color: #ffb3b3;
+        padding: 1.5rem;
+        border-radius: 15px;
+        margin: 1.5rem 0;
+        box-shadow: 0 8px 32px rgba(244, 67, 54, 0.2);
+        backdrop-filter: blur(10px);
     }
+    
+    /* Info box */
     .info-box {
-        background-color: #d1ecf1;
-        border: 1px solid #bee5eb;
-        color: #0c5460;
+        background: linear-gradient(135deg, #1e2a3a 0%, #2d3a5a 100%);
+        border: 2px solid #2196f3;
+        color: #b3d9ff;
+        padding: 1.5rem;
+        border-radius: 15px;
+        margin: 1.5rem 0;
+        box-shadow: 0 8px 32px rgba(33, 150, 243, 0.2);
+        backdrop-filter: blur(10px);
+    }
+    
+    /* File uploader styling */
+    .stFileUploader > div > div {
+        background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
+        border: 2px dashed #666;
+        border-radius: 15px;
+        padding: 2rem;
+    }
+    
+    .stFileUploader > div > div:hover {
+        border-color: #00d4ff;
+        background: linear-gradient(135deg, #2a3a3a 0%, #3a4a4a 100%);
+    }
+    
+    /* Button styling */
+    .stButton > button {
+        background: linear-gradient(45deg, #00d4ff, #0099cc);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        padding: 0.5rem 2rem;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        transition: all 0.3s ease;
+    }
+    
+    .stButton > button:hover {
+        background: linear-gradient(45deg, #0099cc, #0066ff);
+        box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
+        transform: translateY(-2px);
+    }
+    
+    /* Sidebar metrics */
+    .stMetric {
+        background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
+        border: 1px solid #404040;
+        border-radius: 10px;
         padding: 1rem;
-        border-radius: 0.5rem;
-        margin: 1rem 0;
+        margin: 0.5rem 0;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Text styling */
+    .stMarkdown {
+        color: #ffffff;
+    }
+    
+    .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
+        color: #ffffff;
+    }
+    
+    /* Chart styling */
+    .stPlotlyChart {
+        background: transparent;
+        border-radius: 15px;
+        padding: 1rem;
+    }
+    
+    /* Image styling */
+    .stImage {
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        border: 2px solid #404040;
+    }
+    
+    /* Progress bar */
+    .stProgress > div > div > div > div {
+        background: linear-gradient(45deg, #00d4ff, #0099cc);
+    }
+    
+    /* Selectbox styling */
+    .stSelectbox > div > div {
+        background: #2a2a2a;
+        border: 1px solid #404040;
+        border-radius: 10px;
+    }
+    
+    /* Text input styling */
+    .stTextInput > div > div > input {
+        background: #2a2a2a;
+        border: 1px solid #404040;
+        border-radius: 10px;
+        color: #ffffff;
+    }
+    
+    /* Expander styling */
+    .streamlit-expanderHeader {
+        background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
+        border: 1px solid #404040;
+        border-radius: 10px;
+        color: #ffffff;
+    }
+    
+    /* Footer styling */
+    .footer {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        border-top: 2px solid #404040;
+        padding: 2rem;
+        margin-top: 3rem;
+        border-radius: 15px;
+        text-align: center;
+        color: #cccccc;
+    }
+    
+    /* Custom animations */
+    @keyframes glow {
+        0% { box-shadow: 0 0 5px rgba(0, 212, 255, 0.3); }
+        50% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.6); }
+        100% { box-shadow: 0 0 5px rgba(0, 212, 255, 0.3); }
+    }
+    
+    .glow {
+        animation: glow 2s ease-in-out infinite alternate;
+    }
+    
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #1a1a1a;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(45deg, #00d4ff, #0099cc);
+        border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(45deg, #0099cc, #0066ff);
     }
 </style>
 """, unsafe_allow_html=True)
@@ -626,7 +803,12 @@ def main():
     """)
     
     # Main content
-    st.markdown("## 🖼️ Upload Image for Analysis")
+    st.markdown("""
+    <div style="text-align: center; margin: 2rem 0;">
+        <h2 style="color: #ff6b6b; font-size: 2.2rem; margin-bottom: 1rem; text-shadow: 0 0 20px rgba(255, 107, 107, 0.3);">🖼️ Upload Image for Analysis</h2>
+        <p style="color: #cccccc; font-size: 1.1rem;">Upload an image to detect if it has been tampered with using advanced forensic analysis</p>
+    </div>
+    """, unsafe_allow_html=True)
     
     uploaded_file = st.file_uploader(
         "Choose an image file",
@@ -655,12 +837,12 @@ def main():
                 if prediction is not None:
                     # Display results
                     if prediction == 1:
-                        st.markdown('<div class="error-box">', unsafe_allow_html=True)
+                        st.markdown('<div class="error-box glow">', unsafe_allow_html=True)
                         st.markdown("## ⚠️ TAMPERED IMAGE DETECTED")
                         st.markdown(f"**Confidence:** {probability[1]*100:.1f}%")
                         st.markdown("</div>", unsafe_allow_html=True)
                     else:
-                        st.markdown('<div class="success-box">', unsafe_allow_html=True)
+                        st.markdown('<div class="success-box glow">', unsafe_allow_html=True)
                         st.markdown("## ✅ ORIGINAL IMAGE DETECTED")
                         st.markdown(f"**Confidence:** {probability[0]*100:.1f}%")
                         st.markdown("</div>", unsafe_allow_html=True)
@@ -686,7 +868,12 @@ def main():
             st.markdown("</div>", unsafe_allow_html=True)
     
     # Information section
-    st.markdown("## ℹ️ About This System")
+    st.markdown("""
+    <div style="text-align: center; margin: 3rem 0 2rem 0;">
+        <h2 style="color: #00d4ff; font-size: 2.2rem; margin-bottom: 1rem; text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);">ℹ️ About This System</h2>
+        <p style="color: #cccccc; font-size: 1.1rem;">Advanced forensic analysis for tampered image detection</p>
+    </div>
+    """, unsafe_allow_html=True)
     
     col1, col2 = st.columns(2)
     
@@ -713,11 +900,14 @@ def main():
         """)
     
     # Footer
-    st.markdown("---")
     st.markdown("""
-    <div style="text-align: center; color: #666; margin-top: 2rem;">
-        <p><strong>Note:</strong> For best results, upload TIFF images as the model was trained on TIFF format from the SUPATLANTIQUE dataset.</p>
-        <p>This system uses advanced forensic analysis to detect image tampering with high accuracy.</p>
+    <div class="footer">
+        <h3 style="color: #00d4ff; margin-bottom: 1rem;">🔍 AI TraceFinder</h3>
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;"><strong>Note:</strong> For best results, upload TIFF images as the model was trained on TIFF format from the SUPATLANTIQUE dataset.</p>
+        <p style="font-size: 1rem; margin-bottom: 1rem;">This system uses advanced forensic analysis to detect image tampering with high accuracy.</p>
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #404040;">
+            <p style="font-size: 0.9rem; color: #888;">Powered by LightGBM • 105 Forensic Features • 71.4% Accuracy</p>
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
