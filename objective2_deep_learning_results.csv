@@ -1,0 +1,4 @@
+Model,Test Accuracy,ROC AUC,Best Val Accuracy
+Simple CNN,0.75,0.7414965986394557,75.0
+Advanced CNN,0.75,0.3333333333333333,75.0
+Transfer Learning (ResNet50),0.75,0.2653061224489796,75.0

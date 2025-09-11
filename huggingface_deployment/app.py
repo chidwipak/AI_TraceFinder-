@@ -283,8 +283,7 @@ def create_interface():
                 gr.Markdown("### 🎯 Detection Results")
                 result_text = gr.Textbox(
                     label="Prediction Result",
-                    interactive=False,
-                    height=100
+                    interactive=False
                 )
                 
                 result_details = gr.Markdown(label="Detailed Results")
