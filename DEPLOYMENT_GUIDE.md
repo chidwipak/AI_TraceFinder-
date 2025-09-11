@@ -2,17 +2,22 @@
 
 ## Quick Deployment Fix for OpenCV Error
 
-If you're getting the `ImportError: No module named 'cv2'` error during deployment, follow these steps:
+If you're getting the `ImportError: libGL.so.1: cannot open shared object file` error during deployment, follow these steps:
 
 ### 1. Use the Correct Requirements File
 
-For deployment, use `requirements_deployment.txt` instead of the main `requirements.txt`:
+For Streamlit Cloud deployment, use `requirements_streamlit_cloud.txt`:
 
 ```bash
-# In your deployment platform (Streamlit Cloud, Heroku, etc.)
-# Use this requirements file:
-requirements_deployment.txt
+# In Streamlit Cloud, use this requirements file:
+requirements_streamlit_cloud.txt
 ```
+
+### 2. Alternative Requirements Files
+
+- **For general deployment**: `requirements_deployment.txt`
+- **For Streamlit Cloud**: `requirements_streamlit_cloud.txt`
+- **For local development**: `requirements.txt`
 
 ### 2. Alternative: Update Your Main Requirements
 
@@ -60,16 +65,25 @@ streamlit run streamlit_tampered_detection_app.py
 
 ### 6. Troubleshooting
 
+**If you get `libGL.so.1: cannot open shared object file` error:**
+1. This is a common issue in headless deployment environments
+2. Use `opencv-python-headless` instead of `opencv-python`
+3. Use `requirements_streamlit_cloud.txt` for Streamlit Cloud deployment
+
 **If OpenCV still fails:**
 1. Check if your deployment platform supports OpenCV
 2. Try using `opencv-python-headless` instead:
    ```
-   opencv-python-headless==4.8.1.78
+   opencv-python-headless>=4.8.0
    ```
 
 **If model files are missing:**
 1. Ensure all `.joblib` files are committed to git
 2. Check file paths in the app match your deployment structure
+
+**If Python 3.13 compatibility issues:**
+1. Use flexible version requirements (>= instead of ==)
+2. Use `requirements_streamlit_cloud.txt` which has compatible versions
 
 ### 7. Fallback Handling
 

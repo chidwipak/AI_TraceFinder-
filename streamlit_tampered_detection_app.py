@@ -19,14 +19,19 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 import warnings
 warnings.filterwarnings('ignore')
 
-# Try to import OpenCV with fallback handling
+# Try to import OpenCV with fallback handling for deployment
 try:
     import cv2
     CV2_AVAILABLE = True
 except ImportError:
-    CV2_AVAILABLE = False
-    st.error("⚠️ OpenCV not available. Some features may be limited.")
-    st.info("Please ensure opencv-python is installed: pip install opencv-python")
+    # Try headless version for deployment environments
+    try:
+        import cv2
+        CV2_AVAILABLE = True
+    except ImportError:
+        CV2_AVAILABLE = False
+        st.error("⚠️ OpenCV not available. Some features may be limited.")
+        st.info("Please ensure opencv-python-headless is installed: pip install opencv-python-headless")
 
 # Import our custom feature extraction classes
 import sys
