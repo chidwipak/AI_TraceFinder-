@@ -6,6 +6,15 @@ import os
 from PIL import Image
 import cv2
 import json
+from scipy import ndimage
+from scipy.stats import skew, kurtosis
+from scipy.fft import fft2, fftshift
+from skimage import filters, feature, measure
+from skimage.filters import gabor
+import pywt
+import mahotas as mh
+import warnings
+warnings.filterwarnings('ignore')
 
 # Page configuration
 st.set_page_config(
@@ -106,56 +115,274 @@ class TamperedImageDetector:
         except Exception as e:
             st.error(f"❌ Error loading model: {str(e)}")
     
-    def extract_simple_features(self, image):
-        """Extract simplified features for demonstration"""
+    def extract_ela_features(self, image):
+        """Extract Error Level Analysis features"""
+        try:
+            # Convert to grayscale
+            gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+            
+            # Save and reload with JPEG compression
+            temp_path = '/tmp/temp_image.jpg'
+            cv2.imwrite(temp_path, gray, [cv2.IMWRITE_JPEG_QUALITY, 90])
+            compressed = cv2.imread(temp_path, cv2.IMREAD_GRAYSCALE)
+            os.remove(temp_path)
+            
+            # Calculate ELA
+            ela = np.abs(gray.astype(np.float32) - compressed.astype(np.float32))
+            
+            features = [
+                np.mean(ela),
+                np.std(ela),
+                np.max(ela),
+                np.min(ela),
+                np.median(ela),
+                np.var(ela),
+                skew(ela.flatten()),
+                kurtosis(ela.flatten())
+            ]
+            
+            return features
+        except Exception as e:
+            return [0.0] * 8
+    
+    def extract_noise_features(self, image):
+        """Extract noise analysis features"""
+        try:
+            gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+            
+            # Apply different filters
+            gaussian = cv2.GaussianBlur(gray, (5, 5), 0)
+            median = cv2.medianBlur(gray, 5)
+            bilateral = cv2.bilateralFilter(gray, 9, 75, 75)
+            
+            # Calculate noise residuals
+            noise_gaussian = gray.astype(np.float32) - gaussian.astype(np.float32)
+            noise_median = gray.astype(np.float32) - median.astype(np.float32)
+            noise_bilateral = gray.astype(np.float32) - bilateral.astype(np.float32)
+            
+            features = [
+                np.mean(noise_gaussian),
+                np.std(noise_gaussian),
+                np.mean(noise_median),
+                np.std(noise_median),
+                np.mean(noise_bilateral),
+                np.std(noise_bilateral),
+                np.var(noise_gaussian),
+                np.var(noise_median),
+                np.var(noise_bilateral),
+                np.max(noise_gaussian),
+                np.max(noise_median),
+                np.max(noise_bilateral)
+            ]
+            
+            return features
+        except Exception as e:
+            return [0.0] * 12
+    
+    def extract_compression_features(self, image):
+        """Extract compression artifact features"""
+        try:
+            gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+            
+            # DCT analysis
+            dct = cv2.dct(gray.astype(np.float32))
+            
+            # Block artifacts detection
+            block_size = 8
+            artifacts = []
+            for i in range(0, gray.shape[0] - block_size, block_size):
+                for j in range(0, gray.shape[1] - block_size, block_size):
+                    block = gray[i:i+block_size, j:j+block_size]
+                    artifacts.append(np.std(block))
+            
+            features = [
+                np.mean(dct),
+                np.std(dct),
+                np.max(dct),
+                np.min(dct),
+                np.mean(artifacts),
+                np.std(artifacts),
+                np.max(artifacts),
+                np.min(artifacts),
+                np.var(artifacts),
+                np.median(artifacts),
+                skew(np.array(artifacts)),
+                kurtosis(np.array(artifacts)),
+                np.percentile(artifacts, 25),
+                np.percentile(artifacts, 75),
+                np.percentile(artifacts, 90)
+            ]
+            
+            return features
+        except Exception as e:
+            return [0.0] * 15
+    
+    def extract_frequency_features(self, image):
+        """Extract frequency domain features"""
+        try:
+            gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+            
+            # FFT analysis
+            f_transform = fft2(gray)
+            f_shift = fftshift(f_transform)
+            magnitude_spectrum = np.log(np.abs(f_shift) + 1)
+            
+            # DCT analysis
+            dct = cv2.dct(gray.astype(np.float32))
+            
+            # Wavelet analysis
+            coeffs = pywt.dwt2(gray, 'haar')
+            cA, (cH, cV, cD) = coeffs
+            
+            features = [
+                np.mean(magnitude_spectrum),
+                np.std(magnitude_spectrum),
+                np.max(magnitude_spectrum),
+                np.min(magnitude_spectrum),
+                np.var(magnitude_spectrum),
+                np.median(magnitude_spectrum),
+                np.mean(dct),
+                np.std(dct),
+                np.max(dct),
+                np.min(dct),
+                np.mean(cA),
+                np.std(cA),
+                np.mean(cH),
+                np.std(cH),
+                np.mean(cV),
+                np.std(cV),
+                np.mean(cD),
+                np.std(cD),
+                np.var(cA),
+                np.var(cH)
+            ]
+            
+            return features
+        except Exception as e:
+            return [0.0] * 20
+    
+    def extract_statistical_features(self, image):
+        """Extract statistical features"""
+        try:
+            gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+            
+            # Basic statistics
+            features = [
+                np.mean(gray),
+                np.std(gray),
+                np.var(gray),
+                np.median(gray),
+                np.min(gray),
+                np.max(gray),
+                skew(gray.flatten()),
+                kurtosis(gray.flatten()),
+                np.percentile(gray, 25),
+                np.percentile(gray, 75),
+                np.percentile(gray, 90),
+                np.percentile(gray, 95),
+                np.percentile(gray, 99),
+                np.percentile(gray, 1),
+                np.percentile(gray, 5),
+                np.percentile(gray, 10),
+                np.percentile(gray, 20),
+                np.percentile(gray, 30),
+                np.percentile(gray, 40),
+                np.percentile(gray, 50),
+                np.percentile(gray, 60),
+                np.percentile(gray, 70),
+                np.percentile(gray, 80),
+                np.percentile(gray, 85),
+                np.percentile(gray, 90)
+            ]
+            
+            return features
+        except Exception as e:
+            return [0.0] * 25
+    
+    def extract_texture_features(self, image):
+        """Extract texture features"""
+        try:
+            gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+            
+            # GLCM features
+            glcm = feature.graycomatrix(gray, distances=[1], angles=[0, 45, 90, 135], levels=256, symmetric=True, normed=True)
+            
+            # Haralick features
+            contrast = feature.graycoprops(glcm, 'contrast')
+            dissimilarity = feature.graycoprops(glcm, 'dissimilarity')
+            homogeneity = feature.graycoprops(glcm, 'homogeneity')
+            energy = feature.graycoprops(glcm, 'energy')
+            correlation = feature.graycoprops(glcm, 'correlation')
+            
+            # LBP features
+            lbp = feature.local_binary_pattern(gray, 8, 1, method='uniform')
+            lbp_hist, _ = np.histogram(lbp.ravel(), bins=10, range=(0, 10))
+            lbp_hist = lbp_hist.astype(float)
+            lbp_hist /= (lbp_hist.sum() + 1e-7)
+            
+            # Zernike moments
+            zernike_moments = mh.features.zernike_moments(gray, radius=8, degree=8)
+            
+            # Hu moments
+            moments = cv2.moments(gray)
+            hu_moments = cv2.HuMoments(moments).flatten()
+            
+            features = [
+                np.mean(contrast),
+                np.std(contrast),
+                np.mean(dissimilarity),
+                np.std(dissimilarity),
+                np.mean(homogeneity),
+                np.std(homogeneity),
+                np.mean(energy),
+                np.std(energy),
+                np.mean(correlation),
+                np.std(correlation),
+                np.mean(lbp_hist),
+                np.std(lbp_hist),
+                np.max(lbp_hist),
+                np.min(lbp_hist),
+                np.var(lbp_hist),
+                np.median(lbp_hist),
+                np.mean(zernike_moments),
+                np.std(zernike_moments),
+                np.max(zernike_moments),
+                np.min(zernike_moments),
+                np.var(zernike_moments),
+                np.median(zernike_moments),
+                np.mean(hu_moments),
+                np.std(hu_moments),
+                np.max(hu_moments)
+            ]
+            
+            return features
+        except Exception as e:
+            return [0.0] * 25
+    
+    def extract_all_features(self, image):
+        """Extract all 105 forensic features from an image"""
         try:
             # Convert PIL to OpenCV format
             if isinstance(image, Image.Image):
                 image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
             
             # Resize image
-            image = cv2.resize(image, (256, 256))
+            image = cv2.resize(image, (224, 224))
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
             
-            # Convert to grayscale
-            gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-            
-            # Extract basic features
+            # Extract all feature categories
             features = []
+            features.extend(self.extract_ela_features(image))  # 8 features
+            features.extend(self.extract_noise_features(image))  # 12 features
+            features.extend(self.extract_compression_features(image))  # 15 features
+            features.extend(self.extract_frequency_features(image))  # 20 features
+            features.extend(self.extract_statistical_features(image))  # 25 features
+            features.extend(self.extract_texture_features(image))  # 25 features
             
-            # Statistical features
-            features.extend([
-                np.mean(gray),
-                np.std(gray),
-                np.var(gray),
-                np.median(gray),
-                np.min(gray),
-                np.max(gray)
-            ])
-            
-            # Texture features (simplified)
-            features.extend([
-                np.mean(np.gradient(gray)[0]),
-                np.mean(np.gradient(gray)[1]),
-                np.std(np.gradient(gray)[0]),
-                np.std(np.gradient(gray)[1])
-            ])
-            
-            # Frequency domain features (simplified)
-            f_transform = np.fft.fft2(gray)
-            f_shift = np.fft.fftshift(f_transform)
-            magnitude_spectrum = np.log(np.abs(f_shift) + 1)
-            
-            features.extend([
-                np.mean(magnitude_spectrum),
-                np.std(magnitude_spectrum),
-                np.max(magnitude_spectrum),
-                np.min(magnitude_spectrum)
-            ])
-            
-            # Pad or truncate to 30 features
-            while len(features) < 30:
+            # Ensure we have exactly 105 features
+            while len(features) < 105:
                 features.append(0.0)
-            features = features[:30]
+            features = features[:105]
             
             return np.array(features).reshape(1, -1)
             
@@ -182,8 +409,8 @@ class TamperedImageDetector:
             if self.model is None:
                 return None, "Model not loaded"
             
-            # Extract features
-            features = self.extract_simple_features(image)
+            # Extract all 105 features
+            features = self.extract_all_features(image)
             if features is None:
                 return None, "Feature extraction failed"
             
@@ -233,7 +460,7 @@ def create_model_info_section():
         st.metric("Original Images", "66.7% Accuracy")
     
     with col3:
-        st.metric("Features Used", "30")
+        st.metric("Features Used", "105")
         st.metric("Ensemble Method", "Soft Voting")
     
     st.markdown("""
@@ -242,7 +469,7 @@ def create_model_info_section():
     • <strong>Algorithm</strong>: Robust Ensemble combining 5 models (RandomForest, LightGBM, XGBoost, SVM, LogisticRegression)<br>
     • <strong>Ensemble Method</strong>: Soft voting for probability-based predictions<br>
     • <strong>Class Balancing</strong>: SMOTE+ENN for improved original image detection<br>
-    • <strong>Feature Selection</strong>: 30 most important forensic features<br>
+    • <strong>Feature Selection</strong>: 105 comprehensive forensic features<br>
     • <strong>Performance</strong>: 83.3% overall accuracy with balanced performance
     </div>
     """, unsafe_allow_html=True)
