@@ -540,262 +540,232 @@ This project represents a comprehensive research effort in forensic scanner iden
 
 ---
 
-# **OBJECTIVE 2: Tampered/Original Image Detection System**
-
-## **Project Overview**
-Objective 2 focuses on detecting tampered vs original images using forensic analysis techniques. The system analyzes various forensic features to identify image manipulation and achieves 83.3% overall accuracy with a robust ensemble model.
+# **OBJECTIVE 2: Tampered/Original Detection System**
 
 ---
 
-## **Phase 1: Data Analysis and Inventory (Foundation)**
+## **PHASE 1: Initial Pipeline (Tampered images only) — Superseded**
 
-### **Purpose → Action → Outcome**
-- **Purpose**: Analyze the SUPATLANTIQUE dataset structure and create comprehensive data inventory
-- **Action**: Created data analysis pipeline to identify tampered vs original images
-- **Outcome**: Successfully analyzed dataset with 200+ tampered images and corresponding originals
+### 1. Data Analysis
+- **Purpose → Action → Outcome**
+  - **Purpose:** Analyze only the `@Tampered images/` folder (no Originals/).
+  - **Action:** Count images, tampering types, and create a data inventory.
+  - **Outcome:** Inventory and summary of tampered images and their types.
+- **Files/Folders Created:**
+  - `objective2_data_analysis.py`
+  - `objective2_data_inventory.csv`
+  - `objective2_analysis/`, `objective2_analysis_report.json`, `objective2_analysis_visualizations/`
+- **Results:** Only tampered images and their originals (from Tampered images/Original/) included.
 
-### **Files Created and Their Functions**:
+### 2. Data Preprocessing
+- **Purpose → Action → Outcome**
+  - **Purpose:** Preprocess images, create train/test splits, and handle class imbalance.
+  - **Action:** Resize, normalize, augment, and split data.
+  - **Outcome:** Preprocessed data and metadata for training/testing.
+- **Files/Folders Created:**
+  - `objective2_data_preprocessing.py`
+  - `objective2_preprocessing/` (train/, test/, summary, etc.)
+  - `objective2_train_split.csv`, `objective2_test_split.csv`
+- **Results:** Train/test splits, class imbalance not fully addressed.
 
-#### **1. `objective2_data_analysis.py` - Dataset Analysis Pipeline**
-- **Function**: Analyzes SUPATLANTIQUE dataset structure and creates data inventory
-- **Key Features**:
-  - Identifies tampered images (Copy-move, Retouching, Splicing)
-  - Maps original images to tampered counterparts
-  - Creates comprehensive data inventory
-  - Handles binary masks for tampering detection
-- **Output**: `objective2_data_inventory.csv` with complete dataset mapping
+### 3. Feature Extraction
+- **Purpose → Action → Outcome**
+  - **Purpose:** Extract forensic features from images.
+  - **Action:** Extract 105 features (ELA, noise, frequency, texture, etc.).
+  - **Outcome:** Feature matrix for ML/DL models.
+- **Files/Folders Created:**
+  - `objective2_feature_extraction.py`
+  - `objective2_features/`, `objective2_forensic_features.csv`
+- **Results:** Features for only tampered images and their originals.
 
-#### **2. `objective2_analysis/` Directory Structure**
-- **`objective2_analysis/`**: Analysis results and visualizations
-- **`objective2_analysis_report.json`**: Complete analysis summary
-- **`objective2_analysis_visualizations/`**: Dataset analysis plots
+### 4. Baseline ML Models
+- **Purpose → Action → Outcome**
+  - **Purpose:** Train and evaluate traditional ML models.
+  - **Action:** Train LightGBM, RandomForest, XGBoost, SVM, etc.
+  - **Outcome:** Baseline accuracy ~75% (LightGBM best).
+- **Files/Folders Created:**
+  - `objective2_baseline_ml_models.py`
+  - `objective2_baseline_models/`, `objective2_baseline_results.csv`
+- **Results:** Baseline accuracy limited by lack of original class data.
 
----
+### 5. Deep Learning Models
+- **Purpose → Action → Outcome**
+  - **Purpose:** Explore CNNs for tampered detection.
+  - **Action:** Train simple CNN, transfer learning, hybrid models.
+  - **Outcome:** Moderate success, limited by data.
+- **Files/Folders Created:**
+  - `objective2_deep_learning_models.py`
+  - `objective2_deep_learning_models/`, `objective2_deep_learning_results.csv`
+- **Results:** DL models underperformed due to data bias.
 
-## **Phase 2: Data Preprocessing Pipeline (Image Preparation)**
+### 6. Ensemble Models
+- **Purpose → Action → Outcome**
+  - **Purpose:** Combine ML/DL models for better accuracy.
+  - **Action:** Voting, stacking, bagging, boosting.
+  - **Outcome:** Best model: Robust Ensemble (Soft Voting, SMOTE+ENN), 83.3% accuracy.
+- **Files/Folders Created:**
+  - `objective2_ensemble_models.py`
+  - `objective2_ensemble_models/`, `objective2_ensemble_results.csv`
+- **Results:** Still biased, not recommended for deployment.
 
-### **Purpose → Action → Outcome**
-- **Purpose**: Preprocess images for forensic feature extraction
-- **Action**: Created comprehensive preprocessing pipeline with data augmentation
-- **Outcome**: Successfully preprocessed all images with train/test splits
-
-### **Files Created and Their Functions**:
-
-#### **1. `objective2_data_preprocessing.py` - Preprocessing Pipeline**
-- **Function**: Handles image preprocessing, augmentation, and dataset splitting
-- **Key Features**:
-  - Image resizing and normalization
-  - Data augmentation (rotation, flipping, brightness adjustment)
-  - Train/test splitting with stratification
-  - Robust scaling for feature normalization
-- **Output**: `objective2_preprocessing/` directory with processed data
-
-#### **2. `objective2_preprocessing/` Directory Structure**
-- **`objective2_preprocessing/train/`**: Training images
-- **`objective2_preprocessing/test/`**: Testing images
-- **`objective2_preprocessing_summary.json`**: Preprocessing summary
-- **`objective2_train_split.csv`**: Training set metadata
-- **`objective2_test_split.csv`**: Testing set metadata
-
----
-
-## **Phase 3: Forensic Feature Extraction (Comprehensive Feature Engineering)**
-
-### **Purpose → Action → Outcome**
-- **Purpose**: Extract forensic features for tampering detection
-- **Action**: Implemented comprehensive forensic feature extraction pipeline
-- **Outcome**: Extracted 105 forensic features from all images
-
-### **Files Created and Their Functions**:
-
-#### **1. `objective2_feature_extraction.py` - Forensic Feature Engine**
-- **Function**: Extracts 105 forensic features across multiple domains
-- **Key Features**:
-  - **Error Level Analysis (ELA)**: 8 features for compression artifact detection
-  - **Noise Analysis**: 12 features for noise pattern analysis
-  - **Compression Artifacts**: 15 features for JPEG compression analysis
-  - **Frequency Domain Features**: 20 features (DCT, DWT, FFT)
-  - **Statistical Features**: 25 features (mean, std, skewness, kurtosis)
-  - **Texture Features**: 25 features (GLCM, LBP, Haralick, Zernike, Hu moments)
-- **Output**: `objective2_forensic_features.csv` with all extracted features
-
-#### **2. `objective2_features/` Directory Structure**
-- **`objective2_features/`**: Feature extraction results
-- **`objective2_forensic_features.csv`**: Complete feature matrix (105 features)
+### 7. Streamlit App
+- **Purpose → Action → Outcome**
+  - **Purpose:** Deploy as a web app.
+  - **Action:** Build Streamlit app for tampered detection.
+  - **Outcome:** Functional app, but limited by model bias.
+- **Files/Folders Created:**
+  - `streamlit_tampered_detection_app.py`
+  - `run_tampered_detection_app.sh`
+- **Results:** Not recommended for deployment.
 
 ---
 
-## **Phase 4: Baseline Machine Learning Models (Initial ML Implementation)**
+## **PHASE 2: Final Pipeline (Originals + Tampered images) — Recommended**
 
-### **Purpose → Action → Outcome**
-- **Purpose**: Establish baseline performance with traditional ML algorithms
-- **Action**: Implemented and evaluated baseline ML models
-- **Outcome**: Achieved baseline accuracy around 75% with LightGBM performing best
+### 1. Data Analysis
+- **Purpose → Action → Outcome**
+  - **Purpose:** Analyze all data: `@Originals/` (PDFs), `@Tampered images/`, `Binary masks/`, `Description/`.
+  - **Action:** Convert PDFs to images, create a comprehensive inventory, analyze all subfolders.
+  - **Outcome:** Inventory of all originals and tampered images, with masks and metadata.
+- **Files/Folders Created:**
+  - `new_objective2_data_analysis.py`
+  - `new_objective2_analysis/`, `new_objective2_converted_images/`
+  - `new_objective2_analysis/new_objective2_complete_inventory.csv`
+  - `new_objective2_analysis/visualizations/`, `new_objective2_analysis/reports/`
+- **Results:** 344 samples (242 original, 102 tampered), all sources included.
 
-### **Files Created and Their Functions**:
+### 2. Data Preprocessing
+- **Purpose → Action → Outcome**
+  - **Purpose:** Preprocess all images, create balanced train/test splits.
+  - **Action:** Stratified splitting, class balancing (SMOTE, ADASYN, etc.), augmentation.
+  - **Outcome:** Balanced train/test sets, class weights, augmentation configs.
+- **Files/Folders Created:**
+  - `new_objective2_data_preprocessing.py`
+  - `new_objective2_preprocessed/` (train/, test/, metadata/, augmented/, visualizations/, reports/)
+  - `new_objective2_preprocessed/metadata/train_split.csv`, `test_split.csv`, `class_weights.json`, `cv_splits.json`
+- **Results:** Train: 275 (193 original, 82 tampered), Test: 69 (49 original, 20 tampered).
 
-#### **1. `objective2_baseline_ml_models.py` - Baseline ML Pipeline**
-- **Function**: Trains and evaluates traditional ML models for tampering detection
-- **Key Features**:
-  - LightGBM, RandomForest, XGBoost, SVM, Logistic Regression
-  - Cross-validation with StratifiedKFold
-  - Feature importance analysis
-  - Comprehensive evaluation metrics
-- **Output**: `objective2_baseline_models/` directory with trained models
+### 3. Feature Extraction
+- **Purpose → Action → Outcome**
+  - **Purpose:** Extract 84 comprehensive forensic features (statistical, texture, frequency, edge, color, noise, mask-aware).
+  - **Action:** Use binary masks for region-specific features.
+  - **Outcome:** Feature matrix for all images.
+- **Files/Folders Created:**
+  - `new_objective2_feature_extraction.py`
+  - `new_objective2_features/`, `new_objective2_features/feature_vectors/comprehensive_features.csv`
+  - `new_objective2_features/reports/feature_analysis_report.txt`
+- **Results:** 84 features for all images, mask-aware features included.
 
-#### **2. `objective2_baseline_models/` Directory Structure**
-- **`objective2_baseline_models/`**: Trained baseline models
-- **`objective2_baseline_models/lightgbm.joblib`**: Best baseline model (75% accuracy)
-- **`objective2_baseline_models/scaler.joblib`**: Feature scaler
-- **`objective2_baseline_models/feature_info.json`**: Feature selection information
-- **`objective2_baseline_results.csv`**: Baseline model results
+### 4. Baseline ML Models
+- **Purpose → Action → Outcome**
+  - **Purpose:** Train and evaluate traditional ML models with class balancing.
+  - **Action:** Train 64 models (Logistic Regression, SVM, Random Forest, XGBoost, LightGBM, etc.).
+  - **Outcome:** Best accuracy: 88.41% (Logistic Regression with SMOTE).
+- **Files/Folders Created:**
+  - `new_objective2_baseline_ml_models.py`
+  - `new_objective2_baseline_ml_results/`, `all_results.csv`
+  - `new_objective2_baseline_ml_results/reports/baseline_ml_report.txt`
+- **Results:** 88.41% accuracy, robust baseline.
 
----
+### 5. Deep Learning Models
+- **Purpose → Action → Outcome**
+  - **Purpose:** Train CNNs with attention, transfer learning, hybrid models.
+  - **Action:** Use all preprocessed data, mask-aware features.
+  - **Outcome:** Best DL model: Transfer_VGG16, 88.41% accuracy.
+- **Files/Folders Created:**
+  - `new_objective2_deep_learning_models.py`
+  - `new_objective2_deep_learning_results/`, `results/deep_learning_results.csv`
+  - `new_objective2_deep_learning_results/reports/deep_learning_report.txt`
+- **Results:** DL models competitive with ML.
 
-## **Phase 5: Deep Learning Models (CNN and Advanced Architectures)**
+### 6. Ensemble Models
+- **Purpose → Action → Outcome**
+  - **Purpose:** Combine best ML and DL models for maximum accuracy.
+  - **Action:** Voting, stacking, hybrid ML+DL meta-learner.
+  - **Outcome:** Best model: Hybrid_ML_DL ensemble, 89.86% accuracy.
+- **Files/Folders Created:**
+  - `new_objective2_ensemble_models.py`
+  - `new_objective2_ensemble_results/`, `results/ensemble_results.csv`
+  - `new_objective2_ensemble_results/reports/ensemble_report.txt`
+- **Results:** 89.86% accuracy, recommended for deployment.
 
-### **Purpose → Action → Outcome**
-- **Purpose**: Explore deep learning approaches for tampering detection
-- **Action**: Implemented CNN models with various architectures
-- **Outcome**: Achieved moderate success with deep learning approaches
-
-### **Files Created and Their Functions**:
-
-#### **1. `objective2_deep_learning_models.py` - Deep Learning Pipeline**
-- **Function**: Implements CNN models for tampering detection
-- **Key Features**:
-  - Simple CNN architecture
-  - Transfer learning with ResNet50
-  - Advanced CNN with MLP layers
-  - Data augmentation and regularization
-- **Output**: `objective2_deep_learning_models/` directory with trained models
-
-#### **2. `objective2_deep_learning_models/` Directory Structure**
-- **`objective2_deep_learning_models/`**: Trained deep learning models
-- **`best_simple_cnn.pth`**: Simple CNN model
-- **`best_transfer_learning_(resnet50).pth`**: ResNet50 transfer learning model
-- **`best_advanced_cnn.pth`**: Advanced CNN model
-- **`objective2_deep_learning_results.csv`**: Deep learning results
-
----
-
-## **Phase 6: Ensemble Models (Advanced ML Combinations)**
-
-### **Purpose → Action → Outcome**
-- **Purpose**: Create ensemble models combining multiple approaches
-- **Action**: Implemented various ensemble strategies
-- **Outcome**: Achieved improved performance through ensemble methods
-
-### **Files Created and Their Functions**:
-
-#### **1. `objective2_ensemble_models.py` - Ensemble Pipeline**
-- **Function**: Creates ensemble models combining multiple base models
-- **Key Features**:
-  - Voting classifiers (hard and soft voting)
-  - Stacking with meta-learners
-  - Bagging and boosting techniques
-  - Hyperparameter optimization
-- **Output**: `objective2_ensemble_models/` directory with ensemble models
-
-#### **2. `objective2_ensemble_models/` Directory Structure**
-- **`objective2_ensemble_models/`**: Trained ensemble models
-- **`objective2_ensemble_results.csv`**: Ensemble model results
-
----
-
-## **Phase 7: Final Optimization and Robust Model Creation**
-
-### **Purpose → Action → Outcome**
-- **Purpose**: Create the most robust model addressing class imbalance issues
-- **Action**: Implemented robust ensemble with SMOTE+ENN and multiple classifiers
-- **Outcome**: Achieved 83.3% overall accuracy with balanced performance
-
-### **Files Created and Their Functions**:
-
-#### **1. `objective2_final_optimization.py` - Final Optimization Pipeline**
-- **Function**: Creates the most robust ensemble model for production use
-- **Key Features**:
-  - SMOTE+ENN for class balancing
-  - Multiple base models (RandomForest, LightGBM, XGBoost, SVM, LogisticRegression)
-  - Soft voting ensemble strategy
-  - Comprehensive evaluation and model persistence
-- **Output**: `objective2_robust_models/` directory with production models
-
-#### **2. `objective2_robust_models/` Directory Structure**
-- **`objective2_robust_models/ensemble_robust.joblib`**: **FINAL PRODUCTION MODEL**
-- **`objective2_robust_models/scaler_robust.joblib`**: Robust feature scaler
-- **`objective2_robust_models/feature_info_robust.json`**: Feature selection information
-
-#### **3. Robust Model Performance**
-- **Overall Accuracy**: 83.3%
-- **Tampered Images**: 100% accuracy
-- **Original Images**: 66.7% accuracy
-- **Ensemble Method**: Soft voting with 5 base models
-- **Class Balancing**: SMOTE+ENN for improved original image detection
+### 7. Streamlit App
+- **Purpose → Action → Outcome**
+  - **Purpose:** Deploy as a web app.
+  - **Action:** Build Streamlit app using the hybrid ensemble.
+  - **Outcome:** Ready for deployment with best model.
+- **Files/Folders Created:**
+  - (To be updated: new Streamlit app using new_objective2 models)
+- **Results:** Use only new_objective2 models for deployment.
 
 ---
 
-## **Phase 8: Streamlit Application Development (User Interface)**
-
-### **Purpose → Action → Outcome**
-- **Purpose**: Create interactive web application for tampering detection
-- **Action**: Developed comprehensive Streamlit application with robust model integration
-- **Outcome**: Fully functional web app with 83.3% accuracy and user-friendly interface
-
-### **Files Created and Their Functions**:
-
-#### **1. `streamlit_tampered_detection_app.py` - Main Streamlit Application**
-- **Function**: Interactive web application for tampering detection
-- **Key Features**:
-  - Image upload and preprocessing
-  - Real-time feature extraction
-  - Model prediction with confidence scores
-  - Comprehensive UI with performance metrics
-  - Model information and ensemble details
-- **Output**: Fully functional web application
-
-#### **2. `run_tampered_detection_app.sh` - Launch Script**
-- **Function**: Shell script to launch the Streamlit application
-- **Usage**: `./run_tampered_detection_app.sh`
-
-#### **3. `README_Tampered_Detection_App.md` - Application Documentation**
-- **Function**: Complete documentation for the Streamlit application
-- **Content**: Installation, usage, and feature descriptions
-
-#### **4. Streamlit Application Features**
-- **Model**: Robust Ensemble with 83.3% overall accuracy
-- **Features**: 30 selected forensic features
-- **UI**: Modern, responsive interface with performance metrics
-- **Real-time**: Instant predictions with confidence scores
-- **Documentation**: Comprehensive help and model information
+## **Transition Rationale**
+- The initial phase (objective2_*) was found to be biased due to lack of original class data, leading to poor accuracy and generalization.
+- The final phase (new_objective2_*) was created to address this by including all available data, resulting in a much more robust and accurate model.
+- **For deployment and further research, always use the new_objective2_* scripts, features, and models.**
 
 ---
 
-## **Objective 2 Final Results and Model Selection**
+## **Deployment Notes (Objective 2)**
+- **Use only:**
+  - `new_objective2_ensemble_results/models/best_ensemble_meta_learner.pkl` (meta-learner)
+  - Supporting ML/DL models in `new_objective2_ensemble_results/models/` and `new_objective2_deep_learning_results/models/`
+  - All preprocessing, features, and splits from `new_objective2_*` folders
+- **Do NOT use:** Any model or script starting with `objective2_` for deployment
 
-### **Chosen Model**: Robust Ensemble (Soft Voting)
-- **Overall Accuracy**: 83.3%
-- **Tampered Images**: 100% accuracy
-- **Original Images**: 66.7% accuracy
-- **Location**: `objective2_robust_models/ensemble_robust.joblib`
-- **Strategy**: Soft voting ensemble with 5 base models and SMOTE+ENN class balancing
+---
 
-### **Why This Model Was Chosen**:
-1. **Balanced Performance**: Addresses class imbalance issues
-2. **High Tampered Detection**: 100% accuracy on tampered images
-3. **Improved Original Detection**: 66.7% accuracy on original images (vs 0% in baseline)
-4. **Production Ready**: Comprehensive error handling and model persistence
-5. **User Interface**: Complete Streamlit application for easy use
+## **Best Model (as of 2025-09-15)**
+- **Model:** Hybrid_ML_DL (Hybrid Ensemble of top ML + top DL models)
+- **Accuracy:** 89.86% (F1: 0.8511, AUC: 0.8908)
+- **Location:** `new_objective2_ensemble_results/models/best_ensemble_meta_learner.pkl` (meta-learner), with supporting ML and DL models in their respective folders.
+- **Pipeline:** Combines predictions from the best ML models (Logistic Regression, SVM, Random Forest, etc.) and best DL models (Transfer_VGG16, ResNet50V2, CNN_Attention) using a meta-learner.
+- **Deployment:** Use this model for the deployable Streamlit application for tampered/original detection.
 
-### **Key Achievements**:
-✅ **Target Accuracy**: Achieved 83.3% overall accuracy
-✅ **Class Balance**: Fixed severe class imbalance in baseline model
-✅ **Tampered Detection**: 100% accuracy on tampered images
-✅ **Original Detection**: 66.7% accuracy on original images
-✅ **Production Ready**: Complete Streamlit application
-✅ **Feature Engineering**: 105 comprehensive forensic features
-✅ **Model Persistence**: All trained models saved for deployment
-✅ **Documentation**: Complete workflow documentation
+---
+
+## **Pipeline Summary (Updated)**
+1. **Data Analysis:** Convert PDFs in `Originals/` to images, create inventory.
+2. **Data Preprocessing:** Stratified train/test splits, class balancing (SMOTE, ADASYN, etc.).
+3. **Feature Extraction:** 84 comprehensive forensic features, mask-aware features.
+4. **Baseline ML Models:** Best accuracy: 88.41% (Logistic Regression, SVM, etc.).
+5. **Deep Learning Models:** Best accuracy: 88.41% (Transfer_VGG16), others 84-87%.
+6. **Ensemble Models:** Voting/Stacking: 88.41%.
+7. **Hybrid ML+DL Ensemble:** **Best accuracy: 89.86%** (Hybrid_ML_DL meta-learner).
+
+---
+
+## **Results Table (Objective 2)**
+| Model Type         | Best Model         | Accuracy | F1 Score | AUC    |
+|--------------------|-------------------|----------|----------|--------|
+| Baseline ML        | Logistic Regression (SMOTE) | 88.41%   | 0.8333   | 0.8878 |
+| Deep Learning      | Transfer_VGG16     | 88.41%   | 0.8333   | 0.8929 |
+| Ensemble           | Voting/Stacking    | 88.41%   | 0.8333   | 0.9184 |
+| **Hybrid ML+DL**   | **Hybrid_ML_DL**   | **89.86%** | **0.8511** | **0.8908** |
+
+---
+
+## **Deployment Notes**
+- **Objective 1 Streamlit App:** Use `Stacking_Top5_Ridge_model.pkl` for scanner identification.
+- **Objective 2 Streamlit App:** Use the new hybrid ensemble (meta-learner + ML/DL models) for tampered/original detection.
+
+---
+
+## **Recommendations (Updated)**
+- The hybrid ensemble is just 0.14% away from the 90% target. For further improvement, consider:
+  1. Collecting more training data, especially tampered samples.
+  2. Implementing more sophisticated feature engineering.
+  3. Using advanced data augmentation techniques.
+  4. Exploring more advanced architectures and ensemble strategies.
+
+---
+
+## **Summary Table (Both Objectives)**
+| Objective   | Best Model                | Accuracy | Model Path/Notes                                      |
+|-------------|--------------------------|----------|-------------------------------------------------------|
+| Scanner ID  | Stacking_Top5_Ridge      | 93.75%   | ensemble_95_results_ultra/models/Stacking_Top5_Ridge_model.pkl |
+| Tampered/Original | Hybrid_ML_DL Ensemble | 89.86%   | new_objective2_ensemble_results/models/best_ensemble_meta_learner.pkl (+ ML/DL models) |
 
 ---
 
@@ -806,57 +776,3 @@ Objective 2 focuses on detecting tampered vs original images using forensic anal
 - **Best Model**: `objective2_robust_models/ensemble_robust.joblib`
 - **Launch Script**: `run_tampered_detection_app.sh`
 - **Documentation**: `README_Tampered_Detection_App.md`
-
-### **Key Result Directories**:
-- `objective2_robust_models/` - **FINAL PRODUCTION VERSION**
-- `objective2_baseline_models/` - Baseline model results (75% accuracy)
-- `objective2_ensemble_models/` - Ensemble model results
-- `objective2_deep_learning_models/` - Deep learning model results
-- `objective2_features/` - Feature extraction results
-- `objective2_preprocessing/` - Preprocessed data
-
----
-
-## **Installation and Usage for Objective 2**
-
-### **Requirements**:
-- Python 3.8+
-- Streamlit
-- scikit-learn, lightgbm, xgboost
-- opencv-python, PIL, numpy, pandas
-
-### **Installation**:
-```bash
-# Clone the repository
-git clone <repository-url>
-cd AI_TraceFinder
-
-# Create virtual environment
-python3 -m venv venv
-source venv/bin/activate
-
-# Install dependencies
-pip install -r requirements_streamlit_tampered.txt
-```
-
-### **Running the Streamlit Application**:
-```bash
-# Activate virtual environment
-source venv/bin/activate
-
-# Launch the application
-./run_tampered_detection_app.sh
-# OR
-streamlit run streamlit_tampered_detection_app.py
-```
-
-### **Access the Application**:
-- **URL**: http://localhost:8501
-- **Features**: Upload images for tampering detection
-- **Model**: Robust Ensemble with 83.3% accuracy
-
----
-
-## **License**
-
-This project is for research and educational purposes. Please ensure compliance with relevant data usage and licensing requirements.

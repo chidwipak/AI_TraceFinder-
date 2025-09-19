@@ -1,0 +1,85 @@
+nohup: ignoring input
+🔍 Balanced Tampered Detection Training Pipeline
+============================================================
+🚀 Complete Training Pipeline
+==================================================
+
+🔧 Data Preprocessing
+==============================
+🔍 Collecting Balanced Dataset
+========================================
+📊 Dataset counts:
+   Original images: 102
+   Tampered images: 102
+   Balance ratio: 1.00:1
+Extracting features...
+Processing original images...
+  Progress: 0/102
+  Progress: 10/102
+  Progress: 20/102
+  Progress: 30/102
+  Progress: 40/102
+  Progress: 50/102
+  Progress: 60/102
+  Progress: 70/102
+  Progress: 80/102
+  Progress: 90/102
+  Progress: 100/102
+Processing tampered images...
+  Progress: 0/102
+  Progress: 10/102
+  Progress: 20/102
+  Progress: 30/102
+  Progress: 40/102
+  Progress: 50/102
+  Progress: 60/102
+  Progress: 70/102
+  Progress: 80/102
+  Progress: 90/102
+  Progress: 100/102
+
+📊 Preprocessed dataset:
+   Total samples: 204
+   Features per sample: 92
+   Original samples: 102
+   Tampered samples: 102
+   Training samples: 163
+   Test samples: 41
+
+🎯 Training Baseline ML Models
+========================================
+Training Logistic Regression...
+Training Random Forest...
+Training SVM...
+Training Gradient Boosting...
+Training Neural Network...
+
+🎯 Training Ensemble Models
+===================================
+Training Voting Classifier (Soft)...
+Training Voting Classifier (Hard)...
+
+📊 Model Evaluation
+=========================
+LogisticRegression: 0.707
+RandomForest: 0.585
+SVM: 0.732
+GradientBoosting: 0.634
+NeuralNetwork: 0.634
+VotingSoft: 0.732
+VotingHard: 0.659
+
+🏆 Best Model: SVM (0.732)
+
+🎉 Training Complete!
+   Best model: SVM
+   Accuracy: 0.732
+
+💾 Saving Model: SVM
+   Model saved: balanced_tampered_models/svm_model.pkl
+   Scaler saved: balanced_tampered_models/scaler.pkl
+   Imputer saved: balanced_tampered_models/imputer.pkl
+   Feature names saved: balanced_tampered_models/feature_names.txt
+
+⚠️ Model accuracy 73.2% below 85% target
+   Consider feature engineering or more data
