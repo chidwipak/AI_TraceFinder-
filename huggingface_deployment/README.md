@@ -11,6 +11,8 @@ license: mit
 short_description: Advanced forensic image analysis using machine learning to detect tampered images
 ---
 
+<!-- This Space uses requirements.txt for dependencies. Make sure to keep it updated. -->
+
 # 🔍 Tampered Image Detection System
 
 Advanced forensic image analysis using machine learning to detect tampered images with 83.3% overall accuracy.
@@ -63,6 +65,12 @@ Advanced forensic image analysis using machine learning to detect tampered image
 - **Features**: 30 selected forensic features
 - **Dataset**: SUPATLANTIQUE professional tampering dataset
 - **Image Types**: JPG, JPEG, PNG, TIFF
+
+## Deployment Notes
+
+- **Requirements**: The `requirements.txt` file has been updated to use `PyWavelets` instead of `pywt` to fix dependency issues
+- **Compatibility**: This app is optimized for Hugging Face Spaces deployment
+- **Alternative**: A more comprehensive `requirements_gradio.txt` file is also available in the project root for other deployment platforms
 
 ## Limitations
 

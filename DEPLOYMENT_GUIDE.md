@@ -17,6 +17,7 @@ requirements_streamlit_cloud.txt
 
 - **For general deployment**: `requirements_deployment.txt`
 - **For Streamlit Cloud**: `requirements_streamlit_cloud.txt`
+- **For Hugging Face Spaces**: `huggingface_deployment/requirements.txt` or `requirements_gradio.txt`
 - **For local development**: `requirements.txt`
 
 ### 2. Alternative: Update Your Main Requirements
@@ -27,6 +28,14 @@ If you must use `requirements.txt`, ensure it includes:
 opencv-python==4.8.1.78
 opencv-contrib-python==4.8.1.78
 ```
+
+### 3. Gradio Deployment
+
+For Gradio deployment (e.g., Hugging Face Spaces), use `requirements_gradio.txt` which has been optimized for deployment:
+
+- Uses `PyWavelets` instead of `pywt` to fix dependency issues
+- Has lighter dependencies for better compatibility
+- Includes only essential packages for the application
 
 ### 3. Streamlit Cloud Specific
 

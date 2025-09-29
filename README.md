@@ -750,6 +750,22 @@ This project represents a comprehensive research effort in forensic scanner iden
 - **Objective 1 Streamlit App:** Use `Stacking_Top5_Ridge_model.pkl` for scanner identification.
 - **Objective 2 Streamlit App:** Use the new hybrid ensemble (meta-learner + ML/DL models) for tampered/original detection.
 
+## **Alternative Deployment Options**
+
+### **Hugging Face Spaces (Gradio)**
+For easier deployment, you can use the Gradio version of the tampered detection app:
+
+- **Framework**: Gradio
+- **App File**: `gradio_tampered_detection_app.py`
+- **Requirements**: `requirements_gradio.txt` (created in project root)
+- **Model**: Same robust ensemble model
+- **Deployment**: Upload to [Hugging Face Spaces](https://huggingface.co/spaces) with SDK set to "Gradio"
+
+### **Deployment Files**
+- `gradio_tampered_detection_app.py` - Gradio version of the app
+- `requirements_gradio.txt` - Optimized requirements for deployment
+- `huggingface_deployment/` - Complete Hugging Face deployment package
+
 ---
 
 ## **Recommendations (Updated)**

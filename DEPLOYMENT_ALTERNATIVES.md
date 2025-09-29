@@ -10,9 +10,9 @@ Since Streamlit Cloud is having issues, here are several alternative deployment 
 - Better deployment compatibility
 - Handles file uploads well
 
-### **Files Created:**
+### **Files Available:**
 - `gradio_tampered_detection_app.py` - Gradio version of your app
-- `requirements_gradio.txt` - Optimized requirements
+- `requirements_gradio.txt` - Optimized requirements (created in project root)
 
 ### **Deployment Options:**
 
