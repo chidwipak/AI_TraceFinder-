@@ -5,7 +5,7 @@ colorFrom: blue
 colorTo: green
 sdk: gradio
 sdk_version: 4.0.0
-app_file: app.py
+app_file: simple_app.py
 pinned: false
 license: mit
 short_description: Advanced forensic image analysis using machine learning to detect tampered images

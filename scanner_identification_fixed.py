@@ -24,7 +24,8 @@ import pywt
 from scipy.fft import fft2
 from scipy.fftpack import dct
 from scipy.stats import skew, kurtosis
-from skimage.feature import local_binary_pattern, graycomatrix, graycoprops
+# Avoid importing skimage.feature package-level (triggers heavy sub-imports and bugs on some versions)
+from skimage.feature.texture import local_binary_pattern, graycomatrix, graycoprops
 
 class FixedScannerIdentifier:
     def __init__(self):
