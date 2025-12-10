@@ -1,6 +1,0 @@
-FAST ENSEMBLE RESULTS
-==============================
-
-Stacking_Top3_LR: 0.9359 (93.59%)
-Voting_Top3_Hard: 0.9327 (93.27%)
-Voting_All4_Soft: 0.9295 (92.95%)

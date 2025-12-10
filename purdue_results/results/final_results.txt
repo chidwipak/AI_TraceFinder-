@@ -1,6 +1,0 @@
-PURDUE CNN SCANNER IDENTIFICATION RESULTS
-==================================================
-
-Per-patch accuracy: 0.5293 (52.93%)
-Per-image accuracy: 0.0867 (8.67%)
-Target (95%) achieved: NO
